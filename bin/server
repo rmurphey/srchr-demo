@@ -57,3 +57,4 @@ site.get("/favorites/:id", function(req, res) {
 
 // Actually listen
 site.listen(4444);
+console.log("Serving at http://localhost:4444");
