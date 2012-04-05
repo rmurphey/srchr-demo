@@ -1,6 +1,7 @@
 var item = require('server/models/item'),
     r = require('request'),
-    q = require('q');
+    q = require('q'),
+    config = require('server/config.js');
 
 module.exports = function(term) {
   var dfd = q.defer(),
@@ -14,11 +15,17 @@ module.exports = function(term) {
           }
         },
         flickr : {
-          url : 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ef4a854bc88fb51ca16b6d96ac1d078e&tags={term}&format=json&nojsoncallback=1',
+          url : 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={api_key}&tags={term}&format=json&nojsoncallback=1'.replace('{api_key}', config.flickr),
           process : function(data) {
-            return JSON.parse(data).photos.photo.map(function(e) {
-              return new item.flickr(e);
-            });
+            data = JSON.parse(data);
+
+            if (data.photos && data.photos.photo) {
+              return data.photos.photo.map(function(e) {
+                return new item.flickr(e);
+              });
+            }
+
+            return [];
           }
         }
       },

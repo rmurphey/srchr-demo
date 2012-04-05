@@ -5,15 +5,95 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>It works</title>
+  <title>Srchr</title>
 
   <!-- Application styles -->
-  <link rel="stylesheet" href="/assets/css/index.css">
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/srchr.css">
 </head>
 
 <body>
-  <!-- Main container -->
-  <div role="main" id="main"></div>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="#">Srchr</a>
+        <ul class="nav">
+          <li class="active"><a href="#">Search</a></li> 
+          <li><a href="#favorites">Favorites</a></li>
+        </ul>
+        <p class="navbar-text pull-right">Logged in as <span id="username">username</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span9" id="mainbar">
+
+        <form class="component search-form form-inline well">
+          <input type="text" class="span3" placeholder="Enter your search term">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <div class="component search">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#">All Results <span class="badge">5</span></a></li>
+            <li><a href="#">Videos <span class="badge">3</span></a></li>
+            <li><a href="#">Images <span class="badge">2</span></a></li>
+          </ul>
+
+          <div class="result">
+            <div class="row-fluid">
+              <div class="span2">
+                <img src="http://dl.dropbox.com/u/2916642/rmurphey-berlin-small.jpg">
+              </div>
+              <div class="span10">
+                <h2>Result Title</h2>
+                <p>This is some text about the search result.</p>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+
+          <div class="result">
+            <div class="row-fluid">
+              <div class="span2">
+                <img src="http://dl.dropbox.com/u/2916642/rmurphey-berlin-small.jpg">
+              </div>
+              <div class="span10">
+                <h2>Result Title</h2>
+                <p>This is some text about the search result.</p>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="span3" id="sidebar">
+        <div class="component recent-searches">
+          <h3>Recent Searches</h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#">cats</a></li>
+            <li><a href="#">dogs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>&copy; Rebecca Murphey 2012.</p>
+    </footer>
+  </div>
+
+
+
 
   <!-- Application source -->
   <script data-main="app/config" src="/lib/require.js"></script>

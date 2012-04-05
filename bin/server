@@ -6,7 +6,7 @@ var express   = require('express'),
     staticDir = express['static'];
 
 site.configure(function() {
-  [ 'app', 'lib', 'css' ].forEach(function(dir) {
+  [ 'app', 'lib', 'assets' ].forEach(function(dir) {
     site.use('/' + dir, staticDir('./' + dir));
   });
   site.use(express.bodyParser());

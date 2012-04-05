@@ -1,0 +1,7 @@
+module.exports = {
+  /**
+   * In order for this app to fetch data from Flickr,
+   * you will need a Flickr API key. You can obtain one here: http://www.flickr.com/services/apps/create/apply/
+   */
+  flickr : 'your_api_key_here'
+};

@@ -1,0 +1,20 @@
+{
+  "author": "Rebecca Murphey <rmurphey@gmail.com> (http://rmurphey.com)",
+  "name": "app-structure",
+  "description": "A demo app showing app structuring techniques",
+  "version": "0.0.0",
+  "homepage": "http://rmurphey.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rmurphey/app-structure.git"
+  },
+  "engines": {
+    "node": "~0.6.8"
+  },
+  "dependencies": {
+    "q" : "0.8.x",
+    "express" : "2.5.x",
+    "request" : "2.9.x"
+  },
+  "devDependencies": {}
+}
