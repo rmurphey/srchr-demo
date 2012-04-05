@@ -16,7 +16,18 @@ module.exports = {
     delete favorites[id];
   },
 
-  get : function() {
-    return favorites;
+  get : function(id) {
+    if (id) {
+      return favorites[id];
+    }
+
+    return Object.keys(favorites).map(function(id) {
+      return favorites[id];
+    });
+  },
+
+  update : function(id, obj) {
+    favorites[id] = obj;
+    return id;
   }
 };

@@ -29,9 +29,15 @@ site.get("/search/:term", function(req, res) {
   );
 });
 
-site.put("/favorites", function(req, res) {
+site.post("/favorites", function(req, res) {
   var fav = JSON.parse(req.body.favorite);
   var id = favs.add(fav);
+  res.end(JSON.stringify({ id : id }));
+});
+
+site.put("/favorites/:id", function(req, res) {
+  var fav = JSON.parse(req.body.favorite);
+  var id = favs.update(req.params.id, fav);
   res.end(JSON.stringify({ id : id }));
 });
 
@@ -41,7 +47,12 @@ site.delete("/favorites/:id", function(req, res) {
 });
 
 site.get("/favorites", function(req, res) {
-  res.end(JSON.stringify({ favorites : favs.get() }));
+  res.end(JSON.stringify(favs.get()));
+});
+
+site.get("/favorites/:id", function(req, res) {
+  var fav = favs.get(req.params.id);
+  res.end(JSON.stringify(fav));
 });
 
 // Actually listen

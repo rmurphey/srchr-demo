@@ -10,21 +10,16 @@ require.config({
 
     // Libraries
     jquery: "../lib/jquery",
-    underscore: "../lib/underscore",
-    backbone: "../lib/backbone",
+    can: "../lib/can",
 
     // Shim Plugin
     use: "../lib/plugins/use"
   },
 
   use: {
-    backbone: {
-      deps: [ "use!underscore", "jquery" ],
-      attach: "Backbone"
-    },
-
-    underscore: {
-      attach: "_"
+    can: {
+      deps: [ "jquery" ],
+      attach: "can"
     }
   }
 });
