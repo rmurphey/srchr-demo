@@ -16,5 +16,7 @@
     "express" : "2.5.x",
     "request" : "2.9.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha" : "1.0.1"
+  }
 }
