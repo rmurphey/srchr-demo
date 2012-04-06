@@ -7,20 +7,11 @@
   <script src="../libs/mocha.js"></script>
 
   <script>mocha.setup('bdd')</script>
-  
+
 </head>
 <body>
   <div id="mocha"></div>
 
   <script src="../../lib/require.js" data-main="config"></script>
-  <script>
-    (function(){
-      require([
-        'foo'
-      ], function() {
-        mocha.run();
-      });
-    }());
-  </script>
 </body>
 </html>
