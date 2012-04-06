@@ -24,9 +24,15 @@ define([ 'app/component' ], function(C) {
 
     it("should allow placing the component into a node", function() {
       expect(el.children().length).to.be(0);
-      c.placeAt(el);
+
+      var ret = c.placeAt(el);
       expect(el.children().length).to.be(1);
+      expect(ret).to.be(c);
     });
 
+    it("should provide a method for querying itself", function() {
+      c.$el.append('<div class="foo"></div>');
+      expect(c.query('.foo').length).to.be(1);
+    });
   });
 });

@@ -22,6 +22,11 @@ define([
 
       placeAt : function(node) {
         $(node).append(this.$el);
+        return this;
+      },
+
+      query : function(sel) {
+        return this.$el.find(sel);
       }
     }, config));
 
