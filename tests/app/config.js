@@ -1,26 +1,32 @@
 // Set the require.js configuration for your application.
 require.config({
   // Initialize the application with the main application file
-  deps: [ "foo" ],
+  deps : [ 'runner' ],
 
-  paths: {
+  paths : {
     // JavaScript folders
-    app: "../../app",
-    lib: "../../lib",
-    plugins: "../../lib/plugins",
+    test : '.',
+    app : '../../app',
+    lib : '../../lib',
+    plugins : '../../lib/plugins',
 
     // Libraries
-    jquery: "../lib/jquery",
-    can: "../../lib/can",
+    jquery : '../../lib/jquery',
+    underscore : '../../lib/underscore',
+    backbone : '../../lib/backbone',
 
     // Shim Plugin
-    use: "../../lib/plugins/use"
+    use : '../../lib/plugins/use',
+    text : '../../lib/plugins/text'
   },
 
-  use: {
-    can: {
-      deps: [ "jquery" ],
-      attach: "can"
+  use : {
+    underscore : {
+      attach : '_'
+    },
+    backbone : {
+      deps : [ 'use!underscore', 'jquery' ],
+      attach  : 'Backbone'
     }
   }
 });
