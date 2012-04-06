@@ -8,6 +8,7 @@ define([
   var Component = function(config) {
     var ComponentContstructor = Backbone.View.extend(_.extend({
       template : '<div></div>',
+
       render : function() {
         if (!tplCache[this.template]) {
           tplCache[this.template] = _.template(this.template);
@@ -17,6 +18,10 @@ define([
             data = this.model ? this.model.toJSON() : this;
 
         this.$el.html(tpl(data));
+      },
+
+      placeAt : function(node) {
+        $(node).append(this.$el);
       }
     }, config));
 
