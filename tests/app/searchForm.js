@@ -3,13 +3,8 @@ define([ 'app/components/searchForm' ], function(SearchForm) {
     var el, sf;
 
     beforeEach(function() {
-      $('#test').remove();
-      el = $("<div id='test'></div>").appendTo(document.body);
+      el = $('#test').empty();
       sf = new SearchForm().render().placeAt(el);
-    });
-
-    afterEach(function() {
-      $('#test').remove();
     });
 
     it("should create the component", function() {
