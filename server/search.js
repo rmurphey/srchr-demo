@@ -35,7 +35,6 @@ module.exports = function(term) {
       items = [];
 
       typesList.forEach(function(type) {
-        console.log('GOT HERE', type);
         var handle = function(error, response, body) {
           if (error || response.statusCode != 200) {
             error += 1;
@@ -45,7 +44,7 @@ module.exports = function(term) {
           }
 
           if (success === typesList.length) {
-            dfd.resolve({ items : items });
+            dfd.resolve(items);
           }
         };
 

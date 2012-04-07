@@ -21,8 +21,14 @@ define([
         return this;
       },
 
-      placeAt : function(node) {
-        $(node).append(this.$el);
+      placeAt : function(node, position) {
+        var method = {
+          'first' :     'prepend',
+          'last' :      'append',
+          'only' :      'html'
+        }[position] || 'append';
+
+        $(node)[method](this.$el);
         return this;
       },
 

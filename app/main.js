@@ -1,9 +1,8 @@
 require([
   'use!backbone',
   'jquery',
-
   'controllers'
-], function(B, $, controllers) {
+], function(B, $, C) {
   var Router = B.Router.extend({
     routes : {
       '' : 'search',
@@ -11,8 +10,8 @@ require([
       'favorites' : 'favorites'
     },
 
-    search : function(hash) {
-
+    search : function(term) {
+      C.Search(term);
     },
 
     favorites : function(hash) {
