@@ -3,7 +3,7 @@ define([ 'app/component', 'text!app/templates/searchForm.html' ], function(C, tp
     template : tpl,
 
     events : {
-      'click .js-submit' :  '_onSearch'
+      'submit .search-form' :  '_onSearch'
     },
 
     _onSearch : function(e) {
