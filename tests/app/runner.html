@@ -2,16 +2,17 @@
 <head>
   <meta charset="utf-8">
   <title>Mocha Tests</title>
-  <link rel="stylesheet" href="../libs/mocha.css" />
-  <script src="../libs/expect.js"></script>
-  <script src="../libs/mocha.js"></script>
 
-  <script>mocha.setup('bdd')</script>
+  <link rel="stylesheet" href="/tests/libs/mocha.css" />
 
 </head>
 <body>
   <div id="mocha"></div>
 
-  <script src="../../lib/require.js" data-main="config"></script>
+  <script src="/tests/libs/expect.js"></script>
+  <script src="/tests/libs/mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+
+  <script src="/lib/require.js" data-main="app/config"></script>
 </body>
 </html>

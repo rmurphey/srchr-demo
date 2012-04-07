@@ -1,6 +1,6 @@
 require([
-  'test/component',
-  'test/searchForm'
+  'tests/app/component',
+  'tests/app/searchForm'
 ], function() {
   mocha.run();
 });

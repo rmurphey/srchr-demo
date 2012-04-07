@@ -8,18 +8,19 @@ var express   = require('express'),
 
 module.exports = function(opts) {
   opts = _.extend({
-    port : 4444
+    port : 4444,
+    tests : true
   }, opts || {});
 
   site.configure(function() {
-    [ 'app', 'lib', 'assets' ].forEach(function(dir) {
+    [ 'app', 'lib', 'assets', 'tests' ].forEach(function(dir) {
       site.use('/' + dir, staticDir('./' + dir));
     });
     site.use(express.bodyParser());
   });
 
   site.get("/", function(req, res) {
-    fs.createReadStream('./index.html').pipe(res);
+    fs.createReadStream('./app/index.html').pipe(res);
   });
 
   site.get("/search/:term", function(req, res) {
@@ -60,6 +61,12 @@ module.exports = function(opts) {
     var fav = favs.get(req.params.id);
     res.end(JSON.stringify(fav));
   });
+
+  if (opts.tests) {
+    site.get("/test", function(req, res) {
+      fs.createReadStream('./tests/app/runner.html').pipe(res);
+    });
+  }
 
   // Actually listen
   site.listen(opts.port);
