@@ -46,6 +46,35 @@ define([ 'app/components/base' ], function(C) {
         var ret = c.placeAt(el);
         expect(ret).to.be(c);
       });
+
+      it("should append the component by default", function() {
+        el.html('<div class="original"></div>');
+        c.placeAt(el);
+
+        var children = el.children();
+        expect(children.length).to.be(2);
+        expect(children[0].className).to.contain('original');
+        expect(children[1]).to.be(c.el);
+      });
+
+      it("should prepend the component if the position argument is 'first'", function() {
+        el.html('<div class="original"></div>');
+        c.placeAt(el, 'first');
+
+        var children = el.children();
+        expect(children.length).to.be(2);
+        expect(children[0]).to.be(c.el);
+        expect(children[1].className).to.contain('original');
+      });
+
+      it("should replace the original contents of the destination with the component if the position argument is 'only'", function() {
+        el.html('<div class="original"></div>');
+        c.placeAt(el, 'only');
+
+        var children = el.children();
+        expect(children.length).to.be(1);
+        expect(children[0]).to.be(c.el);
+      });
     });
 
     describe("#query", function() {
