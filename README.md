@@ -13,5 +13,5 @@
 
 - [Node](http://nodejs.org/) for the server
 - [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for the UI
-- [CanJS](http://canjs.us/) for the client
+- [Backbone](http://documentcloud.github.com/backbone/) for the client
 - [Mocha](http://visionmedia.github.com/mocha/) for tests
