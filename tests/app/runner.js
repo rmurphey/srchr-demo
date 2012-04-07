@@ -1,7 +1,7 @@
 require([
-  'tests/app/component',
-  'tests/app/searchForm',
-  'tests/app/results'
+  'tests/app/components/base.js',
+  'tests/app/components/searchForm',
+  'tests/app/components/results'
 ], function() {
   mocha.run();
 });
