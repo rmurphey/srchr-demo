@@ -1,4 +1,4 @@
-define([ 'app/component' ], function(C) {
+define([ 'app/components/base' ], function(C) {
   describe("Component", function() {
     var ComponentConstructor, c, el;
 
