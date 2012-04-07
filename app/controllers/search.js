@@ -4,12 +4,24 @@ define([
   'components/searchForm'
 ], function(SearchData, ResultsComponent, SearchFormComponent) {
   return function(term) {
-    var mainbar = $('#mainbar').empty();
-    new SearchFormComponent().render().placeAt(mainbar);
-    new ResultsComponent().render().placeAt(mainbar);
+    update(term);
 
-    SearchData.term = term;
-    SearchData.fetch().then(function(results) {
-    });
+    function update(t) {
+      var mainbar =   $('#mainbar').empty(),
+          sf =        new SearchFormComponent().render().placeAt(mainbar),
+          r =         new ResultsComponent().render().placeAt(mainbar);
+
+      SearchData.term = t;
+      SearchData.fetch().then(function(results) {
+        SearchData.trigger('change');
+      });
+    }
+
+    return {
+      controller : 'Search',
+      update : function(params) {
+        update(params.term);
+      }
+    };
   };
 });

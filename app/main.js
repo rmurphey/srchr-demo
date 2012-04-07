@@ -3,6 +3,8 @@ require([
   'jquery',
   'controllers'
 ], function(B, $, C) {
+  var currentPage;
+
   var Router = B.Router.extend({
     routes : {
       '' : 'search',
@@ -11,7 +13,11 @@ require([
     },
 
     search : function(term) {
-      C.Search(term);
+      if (currentPage.controller !== 'Search') {
+        currentPage = C.Search(term);
+      } else {
+        currentPage.update({ term : term });
+      }
     },
 
     favorites : function(hash) {
@@ -21,7 +27,7 @@ require([
 
   $(function() {
     Router = new Router();
-    B.history.start({ pushState : true });
+    B.history.start(/* { pushState : true } */);
   });
 
   $(document).on('click', 'a', function(e) {
