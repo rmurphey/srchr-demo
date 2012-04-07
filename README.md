@@ -3,9 +3,13 @@
 1. Install node. [Homebrew](http://mxcl.github.com/homebrew/) is your best bet: `brew install node`.
 2. Install [npm](http://npmjs.org/).
 3. Run `npm install` from the root directory of this project to load the dependencies.
-4. Run the server using `node bin/server` and visit the app in your browser at the provided URL.
+4. Run the server using `node bin/server` and [visit the app in your
+   browser](http://localhost:4444).
 
 # Running the Tests
+
+When the server is running, you can view the tests [on the
+server](http://localhost:4444/test).
 
 
 
