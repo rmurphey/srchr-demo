@@ -14,7 +14,7 @@ require([
     },
 
     search : function(term) {
-      app.searches.add({ term : term });
+      app.searches.add({ term : term, time : new Date().getTime() });
 
       if (!currentPage || currentPage.controller !== 'search') {
         currentPage = C.search(term);
