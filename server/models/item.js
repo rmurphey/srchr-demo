@@ -6,7 +6,8 @@ module.exports = {
       thumb : entry.media$group.media$thumbnail[0].url,
       link  : entry.link.filter(function(link) {
         return link.rel === 'alternate';
-      })[0].href
+      })[0].href,
+      favorite : false
     };
   },
 
@@ -29,7 +30,8 @@ module.exports = {
       type : 'image',
       title : entry.title,
       thumb : thumb(),
-      link : url()
+      link : url(),
+      favorite : false
     };
   }
 };
