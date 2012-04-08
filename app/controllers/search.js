@@ -4,17 +4,17 @@ define([
   'components/searchForm'
 ], function(SearchData, ResultsComponent, SearchFormComponent) {
   return function(term) {
-    update(term);
+    var mainbar =   $('#mainbar').empty(),
+        sf =        new SearchFormComponent().render().placeAt(mainbar),
+        r =         new ResultsComponent({
+                      searchData : SearchData
+                    }).render().placeAt(mainbar);
+
+    if (term) { update(term); }
 
     function update(t) {
-      var mainbar =   $('#mainbar').empty(),
-          sf =        new SearchFormComponent().render().placeAt(mainbar),
-          r =         new ResultsComponent().render().placeAt(mainbar);
-
       SearchData.term = t;
-      SearchData.fetch().then(function(results) {
-        SearchData.trigger('change');
-      });
+      SearchData.fetch();
     }
 
     return {

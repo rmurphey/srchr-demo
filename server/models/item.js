@@ -1,6 +1,7 @@
 module.exports = {
   youtube : function(entry) {
     return {
+      type  : 'video',
       title : entry.title.$t,
       thumb : entry.media$group.media$thumbnail[0].url,
       link  : entry.link.filter(function(link) {
@@ -25,6 +26,7 @@ module.exports = {
     }
 
     return {
+      type : 'image',
       title : entry.title,
       thumb : thumb(),
       link : url()

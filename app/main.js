@@ -13,7 +13,7 @@ require([
     },
 
     search : function(term) {
-      if (currentPage.controller !== 'Search') {
+      if (!currentPage || currentPage.controller !== 'Search') {
         currentPage = C.Search(term);
       } else {
         currentPage.update({ term : term });
