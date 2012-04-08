@@ -45,6 +45,7 @@ define([
       el.find('.js-video-filter').trigger('click');
       expect(el.find('.js-video-filter').hasClass('active')).to.be(true);
       expect(el.find('.result.image').filter(':visible').length).to.be(0);
+      expect(el.find('.result.video').filter(':visible').length).to.be(1);
     });
   });
 });
