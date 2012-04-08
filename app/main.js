@@ -1,20 +1,23 @@
 require([
   'use!backbone',
   'jquery',
-  'controllers'
-], function(B, $, C) {
+  'controllers',
+  'models/app'
+], function(B, $, C, app) {
   var currentPage;
 
   var Router = B.Router.extend({
     routes : {
-      '' : 'search',
-      'search/:term' : 'search',
-      'favorites' : 'favorites'
+      '' :              'search',
+      'search/:term' :  'search',
+      'favorites' :     'favorites'
     },
 
     search : function(term) {
-      if (!currentPage || currentPage.controller !== 'Search') {
-        currentPage = C.Search(term);
+      app.searches.add({ term : term });
+
+      if (!currentPage || currentPage.controller !== 'search') {
+        currentPage = C.search(term);
       } else {
         currentPage.update({ term : term });
       }

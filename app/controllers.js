@@ -3,7 +3,7 @@ define([
   'controllers/favorites'
 ], function(search, favorites) {
   return {
-    Search : search,
-    Favorites : favorites
+    search : search,
+    favorites : favorites
   };
 });
