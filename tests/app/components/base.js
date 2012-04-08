@@ -32,6 +32,13 @@ define([ 'app/components/base' ], function(C) {
         var ret = c.render();
         expect(ret).to.be(c);
       });
+
+      it("should trigger a render event", function() {
+        var flag;
+        c.on('render', function() { flag = true; });
+        c.render();
+        expect(flag).to.be(true);
+      });
     });
 
     describe("#placeAt", function() {

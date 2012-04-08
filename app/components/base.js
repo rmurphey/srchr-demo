@@ -18,6 +18,7 @@ define([
             data = this.model ? this.model.toJSON() : this;
 
         this.$el.html(tpl(data));
+        this.trigger('render');
         return this;
       },
 
