@@ -26,7 +26,7 @@ require([
   });
 
   $(function() {
-    Router = new Router();
+    window.Router = Router = new Router();
     B.history.start(/* { pushState : true } */);
   });
 

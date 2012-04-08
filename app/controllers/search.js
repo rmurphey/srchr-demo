@@ -12,6 +12,10 @@ define([
 
     if (term) { update(term); }
 
+    sf.on('search', function(term) {
+      window.Router.navigate('/search/' + term, true);
+    });
+
     function update(t) {
       SearchData.term = t;
       SearchData.fetch();
