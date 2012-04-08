@@ -9,6 +9,20 @@ define([
     var ComponentContstructor = Backbone.View.extend(_.extend({
       template : '<div></div>',
 
+      initialize : function(config) {
+        if (config) {
+          _.keys(config).forEach(_.bind(function(k) {
+            this[k] = config[k];
+          }, this));
+        }
+
+        this.connects();
+      },
+
+      connects : function() {
+        // stub for implementation
+      },
+
       render : function() {
         if (!tplCache[this.template]) {
           tplCache[this.template] = _.template(this.template);

@@ -13,6 +13,24 @@ define([ 'app/components/base' ], function(C) {
       expect(c.template).to.be.a('string');
     });
 
+    describe("#initialize", function() {
+      it("should ingest a config object", function() {
+        c = new ComponentConstructor({ foo : 'bar' });
+        expect(c.foo).to.be('bar');
+      });
+
+      it("should run the connects method", function() {
+        var flag = false;
+        c = new ComponentConstructor({
+          connects : function() {
+            flag = true;
+          }
+        });
+
+        expect(flag).to.be(true);
+      });
+    });
+
     describe("events", function() {
       it("should be able to trigger events", function() {
         var flag = false;

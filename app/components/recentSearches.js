@@ -8,11 +8,7 @@ define([
     template : tpl,
     itemTpl : _.template(itemTpl),
 
-    initialize : function(config) {
-      _.keys(config).forEach(_.bind(function(k) {
-        this[k] = config[k];
-      }, this));
-
+    connects : function() {
       this.searches.on('add remove change', _.bind(this._update, this));
       this.on('render', this._update);
     },
