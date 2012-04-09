@@ -4,7 +4,7 @@ by a user. It uses a variety of technologies, including:
 - [Node](http://nodejs.org/) for the server
 - [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for the UI
 - [Backbone](http://documentcloud.github.com/backbone/) for the client
-- [Mocha](http://visionmedia.github.com/mocha/) for tests
+- [Mocha](http://visionmedia.github.com/mocha/) and [expect.js](https://github.com/LearnBoost/expect.js/blob/master/README.md) for tests
 
 # Running the app
 
