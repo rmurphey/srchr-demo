@@ -20,25 +20,25 @@ define([
                       currentSearch : app.currentSearch
                     }).render().placeAt(sidebar);
 
-    if (term) { update(term); }
-
     sf.on('search', function(term) {
       window.Router.navigate('/search/' + term, true);
     });
 
+    app.currentSearch.on('change', function(s) {
+      SearchData.term = s.get('term');
+      SearchData.fetch();
+    });
+
+    update(term);
+
     function update(t) {
-      if (t) {
-        app.currentSearch.set('term', t);
-        app.currentSearch.trigger('change');
-        SearchData.term = t;
-        SearchData.fetch();
-      }
+      return t && app.currentSearch.set('term', t);
     }
 
     return {
       controller : 'search',
       update : function(params) {
-        update(params.term);
+        return update(params.term);
       }
     };
   };
