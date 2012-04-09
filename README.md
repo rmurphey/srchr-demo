@@ -1,8 +1,5 @@
-This is a sample app that uses a variety of technologies to demonstrate
-concepts behind building client-side applications.
-
-
-# The technologies
+This app searches Flickr and Youtube for content based an a search term entered
+by a user. It uses a variety of technologies, including:
 
 - [Node](http://nodejs.org/) for the server
 - [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for the UI
@@ -31,3 +28,8 @@ You will need to have RequireJS installed:
 Then, from the root of the project, run the following command:
 
     r.js -o srchr.build.js
+
+# TODOs
+
+- Make it possible to favorite items
+- Incorporate other content sources
