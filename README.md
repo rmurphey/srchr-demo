@@ -1,7 +1,8 @@
 # Srchr
 
 This app searches Flickr and Youtube for content based an a search term entered
-by a user. It uses a variety of technologies, including:
+by a user. It is intended as a demo of techniques for building client-side
+apps. It uses a variety of technologies, including:
 
 - [Node](http://nodejs.org/) for the server
 - [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for the UI
