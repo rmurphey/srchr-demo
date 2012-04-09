@@ -10,15 +10,16 @@ define([
       return item.get('time') * -1;
     },
     model : Search,
-    store : function() {
+    store : function(item) {
       window.localStorage.setItem('searches', JSON.stringify(this.toJSON()));
     }
   });
 
   var searches = new Searches(JSON.parse(window.localStorage.getItem('searches')));
-  searches.on('add remove change', searches.store);
+  searches.on('add remove', searches.store);
 
   return {
-    searches : searches
+    searches : searches,
+    currentSearch : new Backbone.Model({ term : null })
   };
 });

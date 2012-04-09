@@ -16,7 +16,8 @@ define([
                     }).render().placeAt(mainbar),
 
         recent =    new RecentSearchesComponent({
-                      searches : app.searches
+                      searches : app.searches,
+                      currentSearch : app.currentSearch
                     }).render().placeAt(sidebar);
 
     if (term) { update(term); }
@@ -26,6 +27,7 @@ define([
     });
 
     function update(t) {
+      app.currentSearch.set('term', t);
       SearchData.term = t;
       SearchData.fetch();
     }

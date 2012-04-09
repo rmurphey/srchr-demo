@@ -9,17 +9,19 @@ define([
     itemTpl : _.template(itemTpl),
 
     connects : function() {
-      this.searches.on('add remove change', _.bind(this._update, this));
       this.on('render', this._update);
+      this.currentSearch.on('change', _.bind(this._update, this));
     },
 
     _update : function() {
       var tpl = this.itemTpl,
+          currentSearch = this.currentSearch.get('term'),
           html = this.searches.map(function(item) {
-            return tpl(item.toJSON());
+            var data = item.toJSON();
+            data.current = data.term === currentSearch;
+            return tpl(data);
           }).join('');
 
-      console.log(this.$el);
       this.query('.js-searches').html(html);
     }
   });
