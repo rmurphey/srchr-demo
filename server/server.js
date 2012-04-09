@@ -8,19 +8,20 @@ var express   = require('express'),
 
 module.exports = function(opts) {
   opts = _.extend({
-    port : 4444,
-    tests : true
+    port :      4444,
+    tests :     true,
+    baseDir :   './'
   }, opts || {});
 
   site.configure(function() {
     [ 'app', 'lib', 'assets', 'tests' ].forEach(function(dir) {
-      site.use('/' + dir, staticDir('./' + dir));
+      site.use('/' + dir, staticDir(opts.baseDir + dir));
     });
     site.use(express.bodyParser());
   });
 
   site.get("/", function(req, res) {
-    fs.createReadStream('./app/index.html').pipe(res);
+    fs.createReadStream(opts.baseDir + 'app/index.html').pipe(res);
   });
 
   site.get("/search/:term", function(req, res) {
@@ -64,7 +65,7 @@ module.exports = function(opts) {
 
   if (opts.tests) {
     site.get("/_test", function(req, res) {
-      fs.createReadStream('./tests/app/runner.html').pipe(res);
+      fs.createReadStream(opts.baseDir + 'tests/app/runner.html').pipe(res);
     });
   }
 
