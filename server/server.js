@@ -63,7 +63,7 @@ module.exports = function(opts) {
   });
 
   if (opts.tests) {
-    site.get("/test", function(req, res) {
+    site.get("/_test", function(req, res) {
       fs.createReadStream('./tests/app/runner.html').pipe(res);
     });
   }
