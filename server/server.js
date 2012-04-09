@@ -1,10 +1,12 @@
 var express   = require('express'),
     fs        = require('fs'),
-    search    = require('server/search.js'),
-    favs      = require('server/favorites.js'),
+    _         = require('underscore'),
+
+    search    = require('./search.js'),
+    favs      = require('./favorites.js'),
+
     site      = express.createServer(),
-    staticDir = express['static'],
-    _         = require('underscore');
+    staticDir = express['static'];
 
 module.exports = function(opts) {
   opts = _.extend({
