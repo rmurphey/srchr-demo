@@ -26,10 +26,15 @@ define([
       window.Router.navigate('/search/' + term, true);
     });
 
-    function update(t) {
-      app.currentSearch.set('term', t);
-      SearchData.term = t;
+    app.currentSearch.on('change', function(s) {
+      SearchData.term = s.get('term');
       SearchData.fetch();
+    });
+
+    function update(t) {
+      if (t) {
+        app.currentSearch.set('term', t);
+      }
     }
 
     return {

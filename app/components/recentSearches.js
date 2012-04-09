@@ -18,8 +18,13 @@ define([
           currentSearch = this.currentSearch.get('term'),
           html = this.searches.map(function(item) {
             var data = item.toJSON();
-            data.current = data.term === currentSearch;
-            return tpl(data);
+
+            if (data.term) {
+              data.current = data.term === currentSearch;
+              return tpl(data);
+            }
+
+            return '';
           }).join('');
 
       this.query('.js-searches').html(html);
