@@ -5,15 +5,12 @@ define([
   return C({
     template : tpl,
 
-    connects : function() {
+    prepare : function() {
       this.user.on('change', _.bind(this._update, this));
-      this.on('render', _.bind(function() {
-        this._update();
-        this._connect();
-      }, this));
     },
 
-    _connect : function() {
+    postRender : function() {
+      this._update();
       this.query('form').submit(_.bind(function(e) {
         e.preventDefault();
         var name = this.query('.js-input').val();
