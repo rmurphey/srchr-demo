@@ -8,9 +8,12 @@ define([
     template : tpl,
     itemTpl : _.template(itemTpl),
 
-    connects : function() {
-      this.on('render', this._update);
+    prepare : function() {
       this.currentSearch.on('change', _.bind(this._update, this));
+    },
+
+    postRender : function() {
+      this._update();
     },
 
     _update : function() {

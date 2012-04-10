@@ -19,10 +19,10 @@ define([ 'app/components/base' ], function(C) {
         expect(c.foo).to.be('bar');
       });
 
-      it("should run the connects method", function() {
+      it("should run the prepare method", function() {
         var flag = false;
         c = new ComponentConstructor({
-          connects : function() {
+          prepare : function() {
             flag = true;
           }
         });
@@ -57,6 +57,18 @@ define([ 'app/components/base' ], function(C) {
         c.render();
         expect(flag).to.be(true);
       });
+
+      it("should call the postRender method", function() {
+        var flag = false;
+        c = new ComponentConstructor({
+          postRender : function() {
+            flag = true;
+          }
+        }).render();
+
+        expect(flag).to.be(true);
+      });
+
     });
 
     describe("#placeAt", function() {

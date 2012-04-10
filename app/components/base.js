@@ -16,10 +16,10 @@ define([
           }, this));
         }
 
-        this.connects();
+        this.prepare();
       },
 
-      connects : function() {
+      prepare : function() {
         // stub for implementation
       },
 
@@ -33,7 +33,12 @@ define([
 
         this.$el.html(tpl(data));
         this.trigger('render');
+        this.postRender();
         return this;
+      },
+
+      postRender : function() {
+        // stub for implementation
       },
 
       placeAt : function(node, position) {
