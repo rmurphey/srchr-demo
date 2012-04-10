@@ -18,7 +18,7 @@ define([
       }
     },
 
-    connects : function() {
+    prepare : function() {
       this.searchData.on('change', _.bind(this._update, this));
       this.itemTpl = _.template(itemTpl);
     },
