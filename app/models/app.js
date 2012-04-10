@@ -20,6 +20,7 @@ define([
 
   return {
     searches : searches,
-    currentSearch : new Backbone.Model({ term : null })
+    currentSearch : new Backbone.Model({ term : null }),
+    currentUser : new Backbone.Model({ name : null })
   };
 });
