@@ -39,28 +39,28 @@ module.exports = function(opts) {
     );
   });
 
-  site.post("/favorites", function(req, res) {
+  site.post("/favorites/:username", function(req, res) {
     var fav = JSON.parse(req.body.favorite);
     var id = favs.add(fav);
     res.end(JSON.stringify({ id : id }));
   });
 
-  site.put("/favorites/:id", function(req, res) {
+  site.put("/favorites/:username/:id", function(req, res) {
     var fav = JSON.parse(req.body.favorite);
     var id = favs.update(req.params.id, fav);
     res.end(JSON.stringify({ id : id }));
   });
 
-  site.delete("/favorites/:id", function(req, res) {
+  site.delete("/favorites/:username/:id", function(req, res) {
     favs.remove(req.params.id);
     res.end(JSON.stringify({ success : true }));
   });
 
-  site.get("/favorites", function(req, res) {
+  site.get("/favorites/:username", function(req, res) {
     res.end(JSON.stringify(favs.get()));
   });
 
-  site.get("/favorites/:id", function(req, res) {
+  site.get("/favorites/:username/:id", function(req, res) {
     var fav = favs.get(req.params.id);
     res.end(JSON.stringify(fav));
   });

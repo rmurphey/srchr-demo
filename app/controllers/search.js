@@ -1,11 +1,10 @@
 define([
   'models/app',
-  'data/search',
   'components/results',
   'components/searchForm',
   'components/recentSearches',
   'components/user'
-], function(app, SearchData, ResultsComponent, SearchFormComponent, RecentSearchesComponent, UserComponent) {
+], function(app, ResultsComponent, SearchFormComponent, RecentSearchesComponent, UserComponent) {
   return function(term) {
     var mainbar =   $('#mainbar').empty(),
         sidebar =   $('#sidebar').empty(),
@@ -13,7 +12,7 @@ define([
         sf =        new SearchFormComponent().render().placeAt(mainbar),
 
         results =   new ResultsComponent({
-                      searchData : SearchData
+                      searchData : app.searchData
                     }).render().placeAt(mainbar),
 
         user =      new UserComponent({
@@ -25,14 +24,13 @@ define([
                       currentSearch : app.currentSearch
                     }).render().placeAt(sidebar);
 
-
     sf.on('search', function(term) {
       window.Router.navigate('/search/' + term, true);
     });
 
     app.currentSearch.on('change', function(s) {
-      SearchData.term = s.get('term');
-      SearchData.fetch();
+      app.searchData.term = s.get('term');
+      app.searchData.fetch();
     });
 
     update(term);

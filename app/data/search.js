@@ -13,5 +13,5 @@ define([
     }
   });
 
-  return new SearchResults();
+  return SearchResults;
 });

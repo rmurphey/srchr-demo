@@ -1,26 +1,34 @@
 define([
-  'use!backbone'
-], function(B) {
-  var Search = B.Model.extend({
-    idAttribute : 'term'
-  });
+  'use!backbone',
+  'data/favorites',
+  'data/searches',
+  'data/search',
+  'models/user'
+], function(B, Favorites, Searches, SearchData, User) {
+  var searches =    new Searches(
+                      JSON.parse(
+                        window.localStorage.getItem('searches')
+                      )
+                    ),
 
-  var Searches = B.Collection.extend({
-    comparator : function(item) {
-      return item.get('time') * -1;
-    },
-    model : Search,
-    store : function(item) {
-      window.localStorage.setItem('searches', JSON.stringify(this.toJSON()));
-    }
-  });
+      favorites =   new Favorites(),
 
-  var searches = new Searches(JSON.parse(window.localStorage.getItem('searches')));
+      user =        new User(),
+
+      search =      new B.Model({ term : null }),
+
+      searchData =  new SearchData();
+
   searches.on('add remove', searches.store);
+  user.on('change', function(u) {
+    favorites.username = u.get('name');
+  });
 
   return {
+    searchData : searchData,
+    favorites : favorites,
     searches : searches,
-    currentSearch : new Backbone.Model({ term : null }),
-    currentUser : new Backbone.Model({ name : null })
+    currentSearch : search,
+    currentUser : user
   };
 });
