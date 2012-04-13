@@ -15,6 +15,20 @@ module.exports = function(term) {
             });
           }
         },
+        twitter : {
+          url : 'http://search.twitter.com/search.json?q={term}&rpp=100',
+          process : function(data) {
+            data = JSON.parse(data);
+
+            if (data.results && data.results.length) {
+              return data.results.map(function(e) {
+                return new item.twitter(e);
+              });
+            }
+
+            return [];
+          }
+        },
         flickr : {
           url : 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={api_key}&tags={term}&format=json&nojsoncallback=1'.replace('{api_key}', config.flickr),
           process : function(data) {
@@ -45,6 +59,14 @@ module.exports = function(term) {
           }
 
           if (success === typesList.length) {
+            items = items
+              .filter(function(item) {
+                return item.title || item.content;
+              })
+              .sort(function(a, b) {
+                return (a.title || a.content) > (b.title || b.content);
+              });
+
             dfd.resolve(items);
           }
         };
