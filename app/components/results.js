@@ -13,6 +13,9 @@ define([
       'click .js-image-filter' : function(evt) {
         this._filter(evt, '.image');
       },
+      'click .js-twitter-filter' : function(evt) {
+        this._filter(evt, '.twitter');
+      },
       'click .js-all-filter' : function(evt) {
         this._filter(evt, '');
       }
@@ -40,7 +43,7 @@ define([
       if (type) {
         this.query('.result').hide();
       }
-      this.query('.result' + type).show();
+      var results = this.query('.result' + type).show();
     },
 
     _update : function() {
@@ -48,18 +51,26 @@ define([
           counts = {
             all : 0,
             video : 0,
-            image : 0
+            image : 0,
+            twitter : 0
           },
           html = this.searchData.map(function(item) {
             var type = item.get('type');
             counts[type] += 1;
             counts.all += 1;
-            return tpl(item.toJSON());
+            var data = item.toJSON();
+            data.icon = {
+              'video' : 'icon-film',
+              'image' : 'icon-picture',
+              'twitter' : 'icon-user'
+            }[data.type];
+
+            return tpl(data);
           }).join('');
 
       this.query('.js-results').html(html);
 
-      _.forEach([ 'all', 'video', 'image' ], _.bind(function(type) {
+      _.forEach([ 'all', 'video', 'image', 'twitter' ], _.bind(function(type) {
         this.query('.js-' + type + '-count').html(counts[type]);
       }, this));
     }
