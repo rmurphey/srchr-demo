@@ -11,9 +11,9 @@ define([
                       )
                     ),
 
-      favorites =   new Favorites(),
-
       user =        new User(),
+
+      favorites =   new Favorites({ user : user }),
 
       search =      new B.Model({ term : null }),
 
