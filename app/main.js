@@ -19,10 +19,6 @@ require([
       } else {
         currentPage.update({ term : term });
       }
-    },
-
-    favorites : function(hash) {
-      // TODO
     }
   });
 
