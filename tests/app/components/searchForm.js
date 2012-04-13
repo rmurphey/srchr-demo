@@ -1,10 +1,14 @@
-define([ 'app/components/searchForm' ], function(SearchForm) {
+define([ 'use!backbone', 'app/components/searchForm' ], function(B, SearchForm) {
   describe("Search form", function() {
-    var el, sf;
+    var el, sf, currentSearch;
 
     beforeEach(function() {
+      currentSearch = new Backbone.Model({ term : null });
+
       el = $('#test').empty();
-      sf = new SearchForm().render().placeAt(el);
+      sf = new SearchForm({
+        currentSearch : currentSearch
+      }).render().placeAt(el);
     });
 
     it("should create the component", function() {
@@ -14,8 +18,8 @@ define([ 'app/components/searchForm' ], function(SearchForm) {
     it("should listen for the form to submit", function() {
       var t;
 
-      sf.on('search', function(term) {
-        t = term;
+      currentSearch.on('change', function(cs) {
+        t = cs.get('term');
       });
 
       el.find('.js-input').val('searchterm');
@@ -26,7 +30,7 @@ define([ 'app/components/searchForm' ], function(SearchForm) {
     it("should not announce an empty search", function() {
       var t = false;
 
-      sf.on('search', function(term) {
+      currentSearch.on('change', function() {
         t = true;
       });
 
