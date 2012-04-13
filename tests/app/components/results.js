@@ -47,5 +47,20 @@ define([
       expect(el.find('.result.image').filter(':visible').length).to.be(0);
       expect(el.find('.result.video').filter(':visible').length).to.be(1);
     });
+
+    describe("#reset", function() {
+      it("should reset the tabs", function() {
+        r._filter({
+          currentTarget : el.find('.js-image-filter')
+        }, 'image');
+
+        r.reset();
+
+        expect(el.find('.js-all-filter').hasClass('active')).to.be.ok();
+        expect(el.find('.active').length).to.be(1);
+      });
+
+    });
+
   });
 });
