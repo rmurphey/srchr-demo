@@ -24,7 +24,7 @@ require([
     },
 
     favorites : function(hash) {
-
+      // TODO
     }
   });
 

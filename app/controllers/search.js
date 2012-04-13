@@ -9,7 +9,9 @@ define([
     var mainbar =   $('#mainbar').empty(),
         sidebar =   $('#sidebar').empty(),
 
-        sf =        new SearchFormComponent().render().placeAt(mainbar),
+        sf =        new SearchFormComponent({
+                      currentSearch : app.currentSearch
+                    }).render().placeAt(mainbar),
 
         results =   new ResultsComponent({
                       searchData : app.searchData
@@ -24,13 +26,12 @@ define([
                       currentSearch : app.currentSearch
                     }).render().placeAt(sidebar);
 
-    sf.on('search', function(term) {
-      window.Router.navigate('/search/' + term, true);
-    });
-
     app.currentSearch.on('change', function(s) {
+      var term = s.get('term');
+      window.Router.navigate('/search/' + term, true);
       app.searchData.term = s.get('term');
       app.searchData.fetch();
+      results.reset();
     });
 
     update(term);

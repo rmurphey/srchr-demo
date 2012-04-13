@@ -10,7 +10,7 @@ define([ 'app/components/base', 'text!app/templates/searchForm.html' ], function
       e.preventDefault();
       var term = $.trim(this.query('.js-input').val());
       if (!term) { return; }
-      this.trigger('search', term);
+      this.currentSearch.set('term', term);
     }
   });
 });
