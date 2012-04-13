@@ -45,20 +45,17 @@ define([
 
     _update : function() {
       var tpl = this.itemTpl,
-          html = this.searchData.map(function(item) {
-            return tpl(item.toJSON());
-          }).join(''),
           counts = {
             all : 0,
             video : 0,
             image : 0
-          };
-
-      this.searchData.forEach(function(item) {
-        var type = item.get('type');
-        counts[type] += 1;
-        counts.all += 1;
-      });
+          },
+          html = this.searchData.map(function(item) {
+            var type = item.get('type');
+            counts[type] += 1;
+            counts.all += 1;
+            return tpl(item.toJSON());
+          }).join('');
 
       this.query('.js-results').html(html);
 
