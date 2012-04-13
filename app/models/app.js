@@ -1,6 +1,7 @@
 define([
-  'use!backbone'
-], function(B) {
+  'use!backbone',
+  'data/search'
+], function(B, SearchData) {
   var Search = B.Model.extend({
     idAttribute : 'term'
   });
@@ -20,6 +21,7 @@ define([
 
   return {
     searches : searches,
+    searchData : new SearchData(),
     currentSearch : new Backbone.Model({ term : null })
   };
 });

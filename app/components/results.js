@@ -23,6 +23,13 @@ define([
       this.itemTpl = _.template(itemTpl);
     },
 
+    reset : function() {
+      this._filter(
+        { currentTarget : this.query('.js-all-filter') },
+        ''
+      );
+    },
+
     _filter : function(evt, type) {
       $(evt.currentTarget).addClass('active').siblings().removeClass('active');
       if (type) {
