@@ -20,6 +20,7 @@ define([
 
     prepare : function() {
       this.searchData.on('change', _.bind(this._update, this));
+      this.searchData.on('fetching', _.bind(this._empty, this));
       this.itemTpl = _.template(itemTpl);
     },
 
@@ -28,6 +29,10 @@ define([
         { currentTarget : this.query('.js-all-filter') },
         ''
       );
+    },
+
+    _empty : function() {
+      this.query('.js-results').html('Loading &hellip;');
     },
 
     _filter : function(evt, type) {
