@@ -1,9 +1,7 @@
 define([
-  'controllers/search',
-  'controllers/favorites'
+  'controllers/search'
 ], function(search, favorites) {
   return {
-    search : search,
-    favorites : favorites
+    search : search
   };
 });

@@ -1,10 +1,10 @@
 define([
   'use!backbone',
+  'collections/searches',
   'data/favorites',
-  'data/searches',
   'data/search',
   'models/user'
-], function(B, Favorites, Searches, SearchData, User) {
+], function(B, Searches, Favorites, SearchData, User) {
   var searches =    new Searches(
                       JSON.parse(
                         window.localStorage.getItem('searches')

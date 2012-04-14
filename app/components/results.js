@@ -13,6 +13,9 @@ define([
       'click .js-image-filter' : function(evt) {
         this._filter(evt, '.image');
       },
+      'click .js-twitter-filter' : function(evt) {
+        this._filter(evt, '.twitter');
+      },
       'click .js-all-filter' : function(evt) {
         this._filter(evt, '');
       }
@@ -20,6 +23,7 @@ define([
 
     prepare : function() {
       this.searchData.on('change', _.bind(this._update, this));
+      this.searchData.on('fetching', _.bind(this._empty, this));
       this.itemTpl = _.template(itemTpl);
     },
 
@@ -30,34 +34,43 @@ define([
       );
     },
 
+    _empty : function() {
+      this.query('.js-results').html('Loading &hellip;');
+    },
+
     _filter : function(evt, type) {
       $(evt.currentTarget).addClass('active').siblings().removeClass('active');
       if (type) {
         this.query('.result').hide();
       }
-      this.query('.result' + type).show();
+      var results = this.query('.result' + type).show();
     },
 
     _update : function() {
       var tpl = this.itemTpl,
-          html = this.searchData.map(function(item) {
-            return tpl(item.toJSON());
-          }).join(''),
           counts = {
             all : 0,
             video : 0,
-            image : 0
-          };
+            image : 0,
+            twitter : 0
+          },
+          html = this.searchData.map(function(item) {
+            var type = item.get('type');
+            counts[type] += 1;
+            counts.all += 1;
+            var data = item.toJSON();
+            data.icon = {
+              'video' : 'icon-film',
+              'image' : 'icon-picture',
+              'twitter' : 'icon-user'
+            }[data.type];
 
-      this.searchData.forEach(function(item) {
-        var type = item.get('type');
-        counts[type] += 1;
-        counts.all += 1;
-      });
+            return tpl(data);
+          }).join('');
 
       this.query('.js-results').html(html);
 
-      _.forEach([ 'all', 'video', 'image' ], _.bind(function(type) {
+      _.forEach([ 'all', 'video', 'image', 'twitter' ], _.bind(function(type) {
         this.query('.js-' + type + '-count').html(counts[type]);
       }, this));
     }

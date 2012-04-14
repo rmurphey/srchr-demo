@@ -14,23 +14,17 @@ require([
     },
 
     search : function(term) {
-      app.searches.add({ term : term, time : new Date().getTime() });
-
       if (!currentPage || currentPage.controller !== 'search') {
         currentPage = C.search(term);
       } else {
         currentPage.update({ term : term });
       }
-    },
-
-    favorites : function(hash) {
-      // TODO
     }
   });
 
   $(function() {
     window.Router = Router = new Router();
-    B.history.start(/* { pushState : true } */);
+    B.history.start();
   });
 
   $(document).on('click', 'a', function(e) {

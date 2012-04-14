@@ -28,7 +28,10 @@ define([
 
     app.currentSearch.on('change', function(s) {
       var term = s.get('term');
+
       window.Router.navigate('/search/' + term, true);
+
+      app.searches.add({ term : term, time : new Date().getTime() });
       app.searchData.term = s.get('term');
       app.searchData.fetch();
       results.reset();

@@ -1,13 +1,23 @@
 module.exports = {
+  twitter : function(entry) {
+    return {
+      type : 'twitter',
+      title : '',
+      content : entry.text,
+      thumb : entry.profile_image_url,
+      link : 'http://twitter.com/' + entry.from_user + '/status/' + entry.id_str
+    };
+  },
+
   youtube : function(entry) {
     return {
       type  : 'video',
       title : entry.title.$t,
+      content : entry.media$group.media$description.$t,
       thumb : entry.media$group.media$thumbnail[0].url,
       link  : entry.link.filter(function(link) {
         return link.rel === 'alternate';
-      })[0].href,
-      favorite : false
+      })[0].href
     };
   },
 
@@ -28,10 +38,10 @@ module.exports = {
 
     return {
       type : 'image',
+      content : '',
       title : entry.title,
       thumb : thumb(),
-      link : url(),
-      favorite : false
+      link : url()
     };
   }
 };
