@@ -12,6 +12,9 @@ define([
     model : Search,
     store : function(item) {
       window.localStorage.setItem('searches', JSON.stringify(this.toJSON()));
+    },
+    initialize : function() {
+      this.on('add remove', this.store);
     }
   });
 
