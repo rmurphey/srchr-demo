@@ -9,7 +9,6 @@ define([
         sidebar =   $('#sidebar').empty(),
 
         sf =        new SearchFormComponent({
-                      currentSearch : app.currentSearch
                     }).render().placeAt(mainbar),
 
         results =   new ResultsComponent({
@@ -23,13 +22,21 @@ define([
 
     app.currentSearch.on('change', function(s) {
       var term = s.get('term');
+      app.router.navigate('/search/' + term, true);
 
-      window.Router.navigate('/search/' + term, true);
+      app.searches.add({
+        term : term,
+        time : new Date().getTime()
+      });
 
-      app.searches.add({ term : term, time : new Date().getTime() });
-      app.searchData.term = s.get('term');
+      app.searchData.term = term;
       app.searchData.fetch();
+
       results.reset();
+    });
+
+    sf.on('search', function(term) {
+      app.currentSearch.set('term', term);
     });
 
     update(term);
