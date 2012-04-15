@@ -56,10 +56,10 @@ define([
           },
           html = this.searchData.map(function(item) {
             console.log('got here');
-            var type = item.get('type');
+            var type = item.get('type'),
+                data = item.toJSON();
             counts[type] += 1;
             counts.all += 1;
-            var data = item.toJSON();
             data.icon = {
               'video' : 'icon-film',
               'image' : 'icon-picture',
