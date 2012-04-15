@@ -1,29 +1,11 @@
 require([
   'use!backbone',
   'jquery',
-  'controllers',
+  'router',
   'models/app'
-], function(B, $, C, app) {
-  var currentPage;
-
-  var Router = B.Router.extend({
-    routes : {
-      '' :              'search',
-      'search/:term' :  'search',
-      'favorites' :     'favorites'
-    },
-
-    search : function(term) {
-      if (!currentPage || currentPage.controller !== 'search') {
-        currentPage = C.search(term);
-      } else {
-        currentPage.update({ term : term });
-      }
-    }
-  });
-
+], function(B, $, Router, app) {
   $(function() {
-    window.Router = Router = new Router();
+    app.router = new Router();
     B.history.start();
   });
 
@@ -33,7 +15,7 @@ require([
 
     if (href && href.slice(0, protocol.length) !== protocol) {
       e.preventDefault();
-      Router.navigate(href, true);
+      app.router.navigate(href, true);
     }
   });
 

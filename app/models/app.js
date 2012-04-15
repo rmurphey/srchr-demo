@@ -3,12 +3,13 @@ define([
   'data/search',
   'collections/searches'
 ], function(B, SearchData, Searches) {
-  var searches = new Searches(JSON.parse(window.localStorage.getItem('searches')));
-  searches.on('add remove', searches.store);
+  var searches = new Searches(JSON.parse(window.localStorage.getItem('searches'))),
+      currentSearch = new Backbone.Model({ term : null }),
+      app = {
+        searchData : new SearchData(),
+        searches : searches,
+        currentSearch : currentSearch
+      };
 
-  return {
-    searches : searches,
-    searchData : new SearchData(),
-    currentSearch : new Backbone.Model({ term : null })
-  };
+  return app;
 });
