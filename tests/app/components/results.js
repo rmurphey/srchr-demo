@@ -18,8 +18,8 @@ define([
       });
 
       data = new Data([
-        _.extend(_.clone(baseItem), { type : 'video' }),
-        _.extend(_.clone(baseItem), { type : 'image' })
+        _.extend(_.clone(baseItem), { type : 'video', content : '' }),
+        _.extend(_.clone(baseItem), { type : 'image', content : '' })
       ]);
 
       r = new Results({

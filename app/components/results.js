@@ -55,6 +55,7 @@ define([
             twitter : 0
           },
           html = this.searchData.map(function(item) {
+            console.log('got here');
             var type = item.get('type');
             counts[type] += 1;
             counts.all += 1;
