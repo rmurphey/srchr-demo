@@ -26,6 +26,10 @@ module.exports = function(opts) {
     fs.createReadStream(opts.baseDir + 'app/index.html').pipe(res);
   });
 
+  site.get("/badapp", function(req, res) {
+    fs.createReadStream(opts.baseDir + 'app/badindex.html').pipe(res);
+  });
+
   site.get("/search/:term", function(req, res) {
     var term = req.params.term;
 
