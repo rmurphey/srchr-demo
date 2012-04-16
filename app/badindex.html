@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Bad Srchr</title>
+
+  <!-- Application styles -->
+  <link rel="stylesheet" href="/assets/css/srchr.css">
+</head>
+
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="#">Srchr</a>
+        <ul class="nav">
+          <!-- <li class="active"><a href="#">Search</a></li> -->
+          <!-- <li><a href="#favorites">Favorites</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row-fluid">
+      <div id="twitter">
+        <div id="searchForm">
+          <form class="form-inline">
+              <input type="text" class="span3 js-input" placeholder="Enter your search term">
+              <button type="submit" class="js-submit btn btn-primary">Search</button>
+          </form>
+          <ul id="searchResults"></ul>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>&copy; Rebecca Murphey 2012.</p>
+    </footer>
+  </div>
+
+  <!-- Application source -->
+  <script src="/lib/jquery.js"></script>
+  <script>
+  $(function() {
+
+    $("#searchForm form").submit(function(e) {
+      alert('submit');
+      e.preventDefault();
+
+      var term = $('#searchForm input').val(),
+          req = $.getJSON('http://search.twitter.com/search.json?callback=?&q=' +
+                encodeURIComponent(term));
+
+      req.then(function(resp) {
+        var resultsHTML = $.map(resp.results, function(r) {
+          return '<li>' +
+            '<p class="tweet">' + r.text + '</p>' +
+            '<p class="username">' + r.from_user + '</p>' +
+          '</li>';
+        }).join('');
+
+        $('#searchResults').html(resultsHTML);
+      });
+    });
+
+  });
+  </script>
+</body>
+</html>
