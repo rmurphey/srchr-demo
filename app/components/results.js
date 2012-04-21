@@ -49,17 +49,15 @@ define([
     _update : function() {
       var tpl = this.itemTpl,
           counts = {
-            all : 0,
+            all : this.searchData.length,
             video : 0,
             image : 0,
             twitter : 0
           },
           html = this.searchData.map(function(item) {
-            console.log('got here');
             var type = item.get('type'),
                 data = item.toJSON();
             counts[type] += 1;
-            counts.all += 1;
             data.icon = {
               'video' : 'icon-film',
               'image' : 'icon-picture',
