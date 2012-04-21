@@ -9,6 +9,9 @@ define([
     itemTpl : _.template(itemTpl),
 
     prepare : function() {
+      if (!_.isFunction(this.currentSearch)) {
+        throw new Error('Recent searches component needs a currentSearch function');
+      }
       this.searches.on('add remove change', this._update, this);
     },
 
