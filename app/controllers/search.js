@@ -22,8 +22,7 @@ define([
     ui.place(results, 'mainbar');
     ui.place(recent, 'sidebar');
 
-    app.currentSearch.on('change', function(s) {
-      var term = s.get('term');
+    app.currentSearch.on('change:term', function(s, term) {
       app.router.navigate('/search/' + term, true);
 
       app.searches.add({
