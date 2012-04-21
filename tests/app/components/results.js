@@ -32,19 +32,22 @@ define([
     });
 
     it("should update when the data changes", function() {
-      data.trigger('change');
+      data.add(_.extend(_.clone(baseItem), { type : 'twitter', content : 'twitter' }));
       expect(el.find('.result.video').length).to.be(1);
       expect(el.find('.result.image').length).to.be(1);
+      expect(el.find('.result.twitter').length).to.be(1);
       expect(el.find('.js-video-count').text()).to.be('1');
       expect(el.find('.js-image-count').text()).to.be('1');
-      expect(el.find('.js-all-count').text()).to.be('2');
+      expect(el.find('.js-twitter-count').text()).to.be('1');
+      expect(el.find('.js-all-count').text()).to.be('3');
     });
 
     it("should filter the results", function() {
-      data.trigger('change');
+      data.add(_.extend(_.clone(baseItem), { type : 'twitter', content : 'twitter' }));
       el.find('.js-video-filter').trigger('click');
       expect(el.find('.js-video-filter').hasClass('active')).to.be(true);
       expect(el.find('.result.image').filter(':visible').length).to.be(0);
+      expect(el.find('.result.twitter').filter(':visible').length).to.be(0);
       expect(el.find('.result.video').filter(':visible').length).to.be(1);
     });
 
