@@ -1,10 +1,7 @@
 define([
-  'use!backbone'
-], function(B) {
-  var Search = B.Model.extend({
-    idAttribute : 'term'
-  });
-
+  'use!backbone',
+  'models/search'
+], function(B, Search) {
   var Searches = B.Collection.extend({
     comparator : function(item) {
       return item.get('time') * -1;
