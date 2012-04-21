@@ -7,8 +7,9 @@ if (window.location.hash) {
     'tests/app/components/base',
     'tests/app/components/searchForm',
     'tests/app/components/results',
-    'tests/app/components/recentSearches'
-  ]
+    'tests/app/components/recentSearches',
+    'tests/app/ui'
+  ];
 }
 
 if (Array.prototype.forEach) {
