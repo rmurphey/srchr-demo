@@ -9,7 +9,7 @@ define([
     itemTpl : _.template(itemTpl),
 
     prepare : function() {
-      this.currentSearch.on('change', _.bind(this._update, this));
+      this.searches.on('add remove change', this._update, this);
     },
 
     postRender : function() {
@@ -17,8 +17,10 @@ define([
     },
 
     _update : function() {
+      this.searches.sort();
+
       var tpl = this.itemTpl,
-          currentSearch = this.currentSearch.get('term'),
+          currentSearch = this.searches.length && this.searches.first().get('term'),
           html = this.searches.map(function(item) {
             var data = item.toJSON();
 

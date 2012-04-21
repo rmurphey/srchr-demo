@@ -14,34 +14,32 @@ define([
                     }).render(),
 
         recent =    new RecentSearchesComponent({
-                      searches : app.searches,
-                      currentSearch : app.currentSearch
+                      searches : app.searches
                     }).render();
 
     ui.place(sf, 'mainbar');
     ui.place(results, 'mainbar');
     ui.place(recent, 'sidebar');
 
-    app.currentSearch.on('change:term', function(s, term) {
-      app.router.navigate('/search/' + term, true);
-
-      app.searches.add({
-        term : term,
-        time : new Date().getTime()
-      });
-
-      app.searchData.term = term;
-      app.searchData.fetch();
-    });
-
-    sf.on('search', function(term) {
-      app.currentSearch.set('term', term);
-    });
-
+    sf.on('search', update);
     update(term);
 
     function update(t) {
-      return t && app.currentSearch.set('term', t);
+      if (!t) { return; }
+
+      var existing = app.searches.where({ term : t }),
+          time = new Date().getTime();
+
+      if (existing.length) {
+        existing[0].set('time', time);
+      } else {
+        app.searches.add({ term : t, time : time });
+      }
+
+      app.searches.sort();
+
+      app.searchData.term = t;
+      app.searchData.fetch();
     }
 
     return {
