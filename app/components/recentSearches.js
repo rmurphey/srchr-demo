@@ -20,7 +20,7 @@ define([
       this.searches.sort();
 
       var tpl = this.itemTpl,
-          currentSearch = this.searches.length && this.searches.first().get('term'),
+          currentSearch = this.currentSearch(),
           html = this.searches.map(function(item) {
             var data = item.toJSON();
 
