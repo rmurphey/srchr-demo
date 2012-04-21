@@ -33,8 +33,6 @@ define([
 
       app.searchData.term = term;
       app.searchData.fetch();
-
-      results.reset();
     });
 
     sf.on('search', function(term) {
