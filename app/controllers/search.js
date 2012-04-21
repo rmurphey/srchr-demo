@@ -1,24 +1,26 @@
 define([
   'models/app',
+  'ui',
   'components/results',
   'components/searchForm',
   'components/recentSearches'
-], function(app, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
+], function(app, ui, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
   return function(term) {
-    var mainbar =   $('#mainbar').empty(),
-        sidebar =   $('#sidebar').empty(),
-
-        sf =        new SearchFormComponent({
-                    }).render().placeAt(mainbar),
+    var sf =        new SearchFormComponent({
+                    }).render(),
 
         results =   new ResultsComponent({
                       searchData : app.searchData
-                    }).render().placeAt(mainbar),
+                    }).render(),
 
         recent =    new RecentSearchesComponent({
                       searches : app.searches,
                       currentSearch : app.currentSearch
-                    }).render().placeAt(sidebar);
+                    }).render();
+
+    ui.place(sf, 'mainbar');
+    ui.place(results, 'mainbar');
+    ui.place(recent, 'sidebar');
 
     app.currentSearch.on('change', function(s) {
       var term = s.get('term');
