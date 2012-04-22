@@ -8,7 +8,10 @@ if (window.location.hash) {
     'tests/app/components/searchForm',
     'tests/app/components/results',
     'tests/app/components/recentSearches',
-    'tests/app/ui'
+
+    'tests/app/ui',
+
+    'tests/app/collections/searches'
   ];
 }
 
