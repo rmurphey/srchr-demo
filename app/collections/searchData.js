@@ -22,7 +22,7 @@ define([
     },
 
     url : function() {
-      return '/search/' + encodeURIComponent(this.term);
+      return '/_data/search/' + encodeURIComponent(this.term);
     }
   });
 

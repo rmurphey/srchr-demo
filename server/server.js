@@ -26,7 +26,7 @@ module.exports = function(opts) {
     fs.createReadStream(opts.baseDir + 'app/index.html').pipe(res);
   });
 
-  site.get("/search/:term", function(req, res) {
+  site.get("/_data/search/:term", function(req, res) {
     var term = req.params.term;
 
     search(req.params.term).then(
