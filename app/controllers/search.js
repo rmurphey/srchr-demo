@@ -10,7 +10,6 @@ define([
                       }).render(),
 
         results =     new ResultsComponent({
-                        searchData : app.get('searchData')
                       }).render(),
 
         recent =      new RecentSearchesComponent({
@@ -46,8 +45,14 @@ define([
         return item.toJSON();
       }));
 
+      results.reset();
+
       searchData.term = t;
-      searchData.fetch();
+      searchData.fetch().then(function() {
+        results.update(searchData.map(function(item) {
+          return item.toJSON();
+        }));
+      });
     }
 
     return {

@@ -22,15 +22,11 @@ define([
     },
 
     prepare : function() {
-      this.searchData.on('add change', this._update, this);
-      this.searchData.on('fetching', function() {
-        this._empty();
-        this.reset();
-      }, this);
       this.itemTpl = _.template(itemTpl);
     },
 
     reset : function() {
+      this._empty();
       this._filter(
         { currentTarget : this.query('.js-all-filter') },
         ''
@@ -49,25 +45,24 @@ define([
       var results = this.query('.result' + type).show();
     },
 
-    _update : function() {
+    update : function(searchData) {
       var tpl = this.itemTpl,
           counts = {
-            all : this.searchData.length,
+            all : searchData.length,
             video : 0,
             image : 0,
             twitter : 0
           },
-          html = this.searchData.map(function(item) {
-            var type = item.get('type'),
-                data = item.toJSON();
+          html = searchData.map(function(item) {
+            var type = item.type;
             counts[type] += 1;
-            data.icon = {
+            item.icon = {
               'video' : 'icon-film',
               'image' : 'icon-picture',
               'twitter' : 'icon-user'
-            }[data.type];
+            }[type];
 
-            return tpl(data);
+            return tpl(item);
           }).join('');
 
       this.query('.js-results').html(html);
