@@ -1,5 +1,5 @@
 define([
-  'app/components/recentSearches',
+  'app/views/recentSearches',
   'use!backbone'
 ], function(RecentSearches, Backbone) {
   describe("Recent searches", function() {
@@ -10,7 +10,11 @@ define([
 
     beforeEach(function() {
       el = $('#test').empty();
-      var Searches = Backbone.Collection.extend({});
+      var Searches = Backbone.Collection.extend({
+        comparator : function() {
+          return -1;
+        }
+      });
       searches = new Searches([
         { term : 'foo' },
         { term : 'bar' }
@@ -18,7 +22,9 @@ define([
 
       rs = new RecentSearches({
         searches : searches,
-        currentSearch : new Backbone.Model()
+        currentSearch : function() {
+          return 'foo';
+        }
       }).render().placeAt(el);
     });
 
@@ -32,15 +38,31 @@ define([
     });
 
     it("should mark the current search term", function() {
-      rs.currentSearch.set('term', 'foo');
       expect(el.find('li.active').text()).to.contain('foo');
     });
 
     it("should update when there is a new search", function() {
       expect(el.html()).not.to.contain('baz');
+      rs.currentSearch = function() { return 'baz'; };
       rs.searches.add({ term : 'baz' });
-      rs.currentSearch.set('term', 'baz');
       expect(el.html()).to.contain('baz');
+      expect(el.find('.active').html()).to.contain('baz');
+    });
+
+    it("should throw an error if currentSearch is not defined", function() {
+      expect(function() {
+        new RecentSearches({
+          searches : searches
+        });
+      }).to.throwError();
+    });
+
+    it("should throw an error if searches is not defined", function() {
+      expect(function() {
+        new RecentSearches({
+          currentSearch : function() {}
+        });
+      }).to.throwError();
     });
   });
 });

@@ -2,7 +2,7 @@ var r = require('request'),
     q = require('q'),
 
     item = require('./models/item'),
-    config = require('./config.js');
+    config = require('./config');
 
 module.exports = function(term) {
   var dfd = q.defer(),

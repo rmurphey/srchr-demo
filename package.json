@@ -1,24 +1,30 @@
 {
   "author": "Rebecca Murphey <rmurphey@gmail.com> (http://rmurphey.com)",
-  "name": "app-structure",
+  "name": "srchr-demo",
   "description": "A demo app showing app structuring techniques",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "homepage": "http://rmurphey.com",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rmurphey/app-structure.git"
+    "url": "git://github.com/rmurphey/srchr-demo.git"
+  },
+  "scripts": {
+    "dev": "node bin/dev",
+    "start": "node bin/server"
   },
   "engines": {
     "node": "~0.6.8"
   },
   "dependencies": {
-    "q" : "0.8.x",
-    "express" : "2.5.x",
-    "request" : "2.9.x",
-    "underscore" : "1.3.x"
+    "q": "0.8.x",
+    "express": "2.5.x",
+    "request": "2.9.x",
+    "underscore": "1.3.x"
   },
   "devDependencies": {
-    "mocha" : "1.0.x",
-    "requirejs" : "1.0.x"
-  }
+    "mocha": "1.0.x",
+    "requirejs": "1.0.x"
+  },
+  "subdomain": "srchr-demo"
 }

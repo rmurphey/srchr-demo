@@ -1,4 +1,7 @@
-define([ 'use!backbone', 'app/components/searchForm' ], function(B, SearchForm) {
+define([
+  'use!backbone',
+  'app/views/searchForm'
+], function(B, SearchForm) {
   describe("Search form", function() {
     var el, sf, currentSearch;
 

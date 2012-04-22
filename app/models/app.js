@@ -1,15 +1,14 @@
 define([
   'use!backbone',
-  'data/search',
+  'collections/searchData',
   'collections/searches'
 ], function(B, SearchData, Searches) {
-  var searches = new Searches(JSON.parse(window.localStorage.getItem('searches'))),
-      currentSearch = new Backbone.Model({ term : null }),
-      app = {
+  var searches = new Searches(),
+      app = new B.Model({
         searchData : new SearchData(),
         searches : searches,
-        currentSearch : currentSearch
-      };
+        currentSearch : null
+      });
 
   return app;
 });

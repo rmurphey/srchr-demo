@@ -1,15 +1,18 @@
 define([
   'use!underscore',
-  'app/components/base',
-  'text!templates/recentSearches.html',
-  'text!templates/recentSearch.html'
+  'views/base',
+  'text!views/templates/recentSearches.html',
+  'text!views/templates/recentSearch.html'
 ], function(_, C, tpl, itemTpl) {
   return C({
     template : tpl,
     itemTpl : _.template(itemTpl),
 
     prepare : function() {
-      this.currentSearch.on('change', _.bind(this._update, this));
+      if (!_.isFunction(this.currentSearch)) {
+        throw new Error('Recent searches component needs a currentSearch function');
+      }
+      this.searches.on('add remove change', this._update, this);
     },
 
     postRender : function() {
@@ -17,8 +20,10 @@ define([
     },
 
     _update : function() {
+      this.searches.sort();
+
       var tpl = this.itemTpl,
-          currentSearch = this.currentSearch.get('term'),
+          currentSearch = this.currentSearch(),
           html = this.searches.map(function(item) {
             var data = item.toJSON();
 

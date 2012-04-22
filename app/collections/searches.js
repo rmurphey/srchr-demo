@@ -1,10 +1,7 @@
 define([
-  'use!backbone'
-], function(B) {
-  var Search = B.Model.extend({
-    idAttribute : 'term'
-  });
-
+  'use!backbone',
+  'models/search'
+], function(B, Search) {
   var Searches = B.Collection.extend({
     comparator : function(item) {
       return item.get('time') * -1;
@@ -14,7 +11,9 @@ define([
       window.localStorage.setItem('searches', JSON.stringify(this.toJSON()));
     },
     initialize : function() {
-      this.on('add remove', this.store);
+      var searches = JSON.parse(window.localStorage.getItem('searches'));
+      _.each(searches, _.bind(this.add, this));
+      this.on('add remove change', this.store);
     }
   });
 

@@ -4,11 +4,17 @@ if (window.location.hash) {
   tests = location.hash.replace('#', '').split(',');
 } else {
   tests = [
-    'tests/app/components/base',
-    'tests/app/components/searchForm',
-    'tests/app/components/results',
-    'tests/app/components/recentSearches'
-  ]
+    'tests/app/views/base',
+    'tests/app/views/searchForm',
+    'tests/app/views/results',
+    'tests/app/views/recentSearches',
+
+    'tests/app/ui',
+
+    'tests/app/collections/searches',
+
+    'tests/app/data/search'
+  ];
 }
 
 if (Array.prototype.forEach) {

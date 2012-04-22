@@ -1,7 +1,7 @@
 define([
-  'app/components/base',
-  'text!app/templates/results.html',
-  'text!app/templates/result.html'
+  'views/base',
+  'text!views/templates/results.html',
+  'text!views/templates/result.html'
 ], function(C, tpl, itemTpl) {
   return C({
     template : tpl,
@@ -22,8 +22,11 @@ define([
     },
 
     prepare : function() {
-      this.searchData.on('change', _.bind(this._update, this));
-      this.searchData.on('fetching', _.bind(this._empty, this));
+      this.searchData.on('add change', this._update, this);
+      this.searchData.on('fetching', function() {
+        this._empty();
+        this.reset();
+      }, this);
       this.itemTpl = _.template(itemTpl);
     },
 
@@ -49,17 +52,15 @@ define([
     _update : function() {
       var tpl = this.itemTpl,
           counts = {
-            all : 0,
+            all : this.searchData.length,
             video : 0,
             image : 0,
             twitter : 0
           },
           html = this.searchData.map(function(item) {
-            console.log('got here');
             var type = item.get('type'),
                 data = item.toJSON();
             counts[type] += 1;
-            counts.all += 1;
             data.icon = {
               'video' : 'icon-film',
               'image' : 'icon-picture',

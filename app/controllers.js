@@ -1,6 +1,6 @@
 define([
   'controllers/search'
-], function(search, favorites) {
+], function(search) {
   return {
     search : search
   };

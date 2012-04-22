@@ -1,4 +1,7 @@
-define([ 'app/components/base', 'text!app/templates/searchForm.html' ], function(C, tpl) {
+define([
+  'views/base',
+  'text!views/templates/searchForm.html'
+], function(C, tpl) {
   return C({
     template : tpl,
 
