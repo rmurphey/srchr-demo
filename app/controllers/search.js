@@ -6,24 +6,24 @@ define([
   'components/recentSearches'
 ], function(app, ui, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
   return function(term) {
-    var sf =        new SearchFormComponent({}).render(),
+    var searchForm =  new SearchFormComponent({}).render(),
 
-        results =   new ResultsComponent({
-                      searchData : app.get('searchData')
-                    }).render(),
+        results =     new ResultsComponent({
+                        searchData : app.get('searchData')
+                      }).render(),
 
-        recent =    new RecentSearchesComponent({
-                      searches : app.get('searches'),
-                      currentSearch : function() {
-                        return app.get('currentSearch');
-                      }
-                    }).render();
+        recent =      new RecentSearchesComponent({
+                        searches : app.get('searches'),
+                        currentSearch : function() {
+                          return app.get('currentSearch');
+                        }
+                      }).render();
 
-    ui.place(sf, 'mainbar');
+    ui.place(searchForm, 'mainbar');
     ui.place(results, 'mainbar');
     ui.place(recent, 'sidebar');
 
-    sf.on('search', update);
+    searchForm.on('search', update);
     update(term);
 
     function update(t) {
