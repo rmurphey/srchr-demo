@@ -1,5 +1,5 @@
 define([
-  'app/components/results',
+  'app/views/results',
   'use!backbone'
 ], function(Results, B) {
   describe("Results", function() {

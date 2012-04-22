@@ -1,5 +1,5 @@
 define([
-  'app/components/recentSearches',
+  'app/views/recentSearches',
   'use!backbone'
 ], function(RecentSearches, Backbone) {
   describe("Recent searches", function() {

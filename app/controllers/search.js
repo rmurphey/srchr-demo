@@ -1,9 +1,9 @@
 define([
   'models/app',
   'ui',
-  'components/results',
-  'components/searchForm',
-  'components/recentSearches'
+  'views/results',
+  'views/searchForm',
+  'views/recentSearches'
 ], function(app, ui, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
   return function(term) {
     var searchForm =  new SearchFormComponent({}).render(),

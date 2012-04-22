@@ -1,7 +1,7 @@
 define([
-  'app/components/base',
-  'text!app/templates/results.html',
-  'text!app/templates/result.html'
+  'views/base',
+  'text!views/templates/results.html',
+  'text!views/templates/result.html'
 ], function(C, tpl, itemTpl) {
   return C({
     template : tpl,

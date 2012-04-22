@@ -1,8 +1,8 @@
 define([
   'use!underscore',
-  'app/components/base',
-  'text!templates/recentSearches.html',
-  'text!templates/recentSearch.html'
+  'views/base',
+  'text!views/templates/recentSearches.html',
+  'text!views/templates/recentSearch.html'
 ], function(_, C, tpl, itemTpl) {
   return C({
     template : tpl,

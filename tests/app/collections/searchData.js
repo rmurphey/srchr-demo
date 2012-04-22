@@ -1,5 +1,5 @@
 define([
-  'app/data/search'
+  'app/collections/searchData'
 ], function(SearchData) {
   describe("Search Data Collection", function() {
     var sd;
