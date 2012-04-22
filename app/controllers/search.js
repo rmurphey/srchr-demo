@@ -4,15 +4,15 @@ define([
   'views/results',
   'views/searchForm',
   'views/recentSearches'
-], function(app, ui, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
+], function(app, ui, ResultsView, SearchFormView, RecentSearchesView) {
   return function(term) {
-    var searchForm =  new SearchFormComponent({}).render(),
+    var searchForm =  new SearchFormView({}).render(),
 
-        results =     new ResultsComponent({
+        results =     new ResultsView({
                         searchData : app.get('searchData')
                       }).render(),
 
-        recent =      new RecentSearchesComponent({
+        recent =      new RecentSearchesView({
                         searches : app.get('searches'),
                         currentSearch : function() {
                           return app.get('currentSearch');
