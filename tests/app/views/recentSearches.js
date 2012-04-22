@@ -10,18 +10,12 @@ define([
 
     beforeEach(function() {
       el = $('#test').empty();
-      var Searches = Backbone.Collection.extend({
-        comparator : function() {
-          return -1;
-        }
-      });
-      searches = new Searches([
+      searches = [
         { term : 'foo' },
         { term : 'bar' }
-      ]);
+      ];
 
       rs = new RecentSearches({
-        searches : searches,
         currentSearch : function() {
           return 'foo';
         }
@@ -44,25 +38,16 @@ define([
     it("should update when there is a new search", function() {
       expect(el.html()).not.to.contain('baz');
       rs.currentSearch = function() { return 'baz'; };
-      rs.searches.add({ term : 'baz' });
+      rs.update(searches);
       expect(el.html()).to.contain('baz');
       expect(el.find('.active').html()).to.contain('baz');
     });
 
     it("should throw an error if currentSearch is not defined", function() {
       expect(function() {
-        new RecentSearches({
-          searches : searches
-        });
+        new RecentSearches({});
       }).to.throwError();
     });
 
-    it("should throw an error if searches is not defined", function() {
-      expect(function() {
-        new RecentSearches({
-          currentSearch : function() {}
-        });
-      }).to.throwError();
-    });
   });
 });

@@ -6,14 +6,14 @@ define([
   'views/recentSearches'
 ], function(app, ui, ResultsComponent, SearchFormComponent, RecentSearchesComponent) {
   return function(term) {
-    var searchForm =  new SearchFormComponent({}).render(),
+    var searchForm =  new SearchFormComponent({
+                      }).render(),
 
         results =     new ResultsComponent({
                         searchData : app.get('searchData')
                       }).render(),
 
         recent =      new RecentSearchesComponent({
-                        searches : app.get('searches'),
                         currentSearch : function() {
                           return app.get('currentSearch');
                         }
@@ -41,6 +41,10 @@ define([
       } else {
         searches.add({ term : t, time : time });
       }
+
+      recent.update(searches.map(function(item) {
+        return item.toJSON();
+      }));
 
       searchData.term = t;
       searchData.fetch();

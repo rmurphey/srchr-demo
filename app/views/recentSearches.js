@@ -12,24 +12,15 @@ define([
       if (!_.isFunction(this.currentSearch)) {
         throw new Error('Recent searches component needs a currentSearch function');
       }
-      this.searches.on('add remove change', this._update, this);
     },
 
-    postRender : function() {
-      this._update();
-    },
-
-    _update : function() {
-      this.searches.sort();
-
+    update : function(searches) {
       var tpl = this.itemTpl,
           currentSearch = this.currentSearch(),
-          html = this.searches.map(function(item) {
-            var data = item.toJSON();
-
-            if (data.term) {
-              data.current = data.term === currentSearch;
-              return tpl(data);
+          html = searches.map(function(item) {
+            if (item.term) {
+              item.current = item.term === currentSearch;
+              return tpl(item);
             }
 
             return '';
