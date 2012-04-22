@@ -11,7 +11,9 @@ if (window.location.hash) {
 
     'tests/app/ui',
 
-    'tests/app/collections/searches'
+    'tests/app/collections/searches',
+
+    'tests/app/data/search'
   ];
 }
 
