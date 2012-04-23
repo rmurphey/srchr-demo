@@ -9,11 +9,8 @@ if (window.location.hash) {
     'tests/app/views/results',
     'tests/app/views/recentSearches',
 
-    'tests/app/ui',
-
     'tests/app/collections/searches',
-
-    'tests/app/data/search'
+    'tests/app/collections/searchData'
   ];
 }
 

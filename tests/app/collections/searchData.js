@@ -10,7 +10,7 @@ define([
     });
 
     it("should return a URI-encoded URL", function() {
-      expect(sd.url()).to.be('/search/foo%20bar');
+      expect(sd.url).to.be('/_data/search');
     });
 
     it("should trigger a fetching event when fetching", function() {
@@ -20,7 +20,7 @@ define([
         flag = true;
       });
 
-      sd.fetch();
+      sd.fetch({ data : { term : 'foo bar' } });
       expect(flag).to.be.ok();
     });
 
