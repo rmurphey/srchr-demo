@@ -50,10 +50,6 @@ define([
 
         $(node)[method](this.$el);
         return this;
-      },
-
-      query : function(sel) {
-        return this.$el.find(sel);
       }
     }, config));
 

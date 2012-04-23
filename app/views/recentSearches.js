@@ -35,7 +35,7 @@ define([
             return '';
           }).join('');
 
-      this.query('.js-searches').html(html);
+      this.$('.js-searches').html(html);
     }
   });
 });

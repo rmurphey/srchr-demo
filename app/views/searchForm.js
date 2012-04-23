@@ -18,7 +18,7 @@ define([
       e.preventDefault();
       if (this.disabled) { return; }
 
-      var term = $.trim(this.query('.js-input').val());
+      var term = $.trim(this.$('.js-input').val());
       if (!term) { return; }
       this._disable();
       this.trigger('search', term);
@@ -26,12 +26,12 @@ define([
 
     release : function() {
       this.disabled = false;
-      this.query('.js-submit').removeAttr('disabled');
+      this.$('.js-submit').removeAttr('disabled');
     },
 
     _disable : function() {
       this.disabled = true;
-      this.query('.js-submit').attr('disabled', true);
+      this.$('.js-submit').attr('disabled', true);
     }
   });
 });

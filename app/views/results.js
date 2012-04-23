@@ -32,21 +32,21 @@ define([
 
     reset : function() {
       this._filter(
-        { currentTarget : this.query('.js-all-filter') },
+        { currentTarget : this.$('.js-all-filter') },
         ''
       );
     },
 
     _empty : function() {
-      this.query('.js-results').html('Loading &hellip;');
+      this.$('.js-results').html('Loading &hellip;');
     },
 
     _filter : function(evt, type) {
       $(evt.currentTarget).addClass('active').siblings().removeClass('active');
       if (type) {
-        this.query('.result').hide();
+        this.$('.result').hide();
       }
-      var results = this.query('.result' + type).show();
+      var results = this.$('.result' + type).show();
     },
 
     _update : function() {
@@ -70,10 +70,10 @@ define([
             return tpl(data);
           }).join('');
 
-      this.query('.js-results').html(html);
+      this.$('.js-results').html(html);
 
       _.forEach([ 'all', 'video', 'image', 'twitter' ], _.bind(function(type) {
-        this.query('.js-' + type + '-count').html(counts[type]);
+        this.$('.js-' + type + '-count').html(counts[type]);
       }, this));
     }
   });

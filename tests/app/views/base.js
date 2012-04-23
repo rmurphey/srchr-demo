@@ -113,13 +113,5 @@ define([ 'app/views/base' ], function(C) {
         expect(children[0]).to.be(c.el);
       });
     });
-
-    describe("#query", function() {
-      it("should query inside the component", function() {
-        c.$el.append('<div class="foo"></div>');
-        expect(c.query('.foo').length).to.be(1);
-      });
-    });
-
   });
 });
