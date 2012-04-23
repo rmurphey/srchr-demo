@@ -14,7 +14,7 @@ define([
       expect(el.find('.component.search-form').length).to.be(1);
     });
 
-    it("should listen for the form to submit", function() {
+    it("should announce the form submission", function() {
       var t;
 
       sf.on('search', function(term) {

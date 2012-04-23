@@ -81,7 +81,7 @@ define([ 'app/views/base' ], function(C) {
 
       it("should be chainable", function() {
         var ret = c.placeAt(el);
-        expect(ret).to.be(c);
+        expect(ret.el).to.be(c.el);
       });
 
       it("should append the component by default", function() {
