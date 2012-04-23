@@ -1,26 +1,28 @@
 define([
+  'controllers/base',
   'models/app',
   'views/results',
   'views/searchForm',
   'views/recentSearches'
-], function(app, ResultsView, SearchFormView, RecentSearchesView) {
+], function(Controller, app, ResultsView, SearchFormView, RecentSearchesView) {
   return function(term) {
-    var searchForm =  new SearchFormView({}).render(),
+    var SearchController  = new Controller({
+          name : 'search',
+          update : function(params) {
+            return update(params.term);
+          }
+        });
 
-        results =     new ResultsView({
-                        searchData : app.get('searchData')
-                      }).render(),
-
-        recent =      new RecentSearchesView({
-                        searches : app.get('searches'),
-                        currentSearch : function() {
-                          return app.get('currentSearch');
-                        }
-                      }).render();
-
-    searchForm.placeAt('#mainbar');
-    results.placeAt('#mainbar');
-    recent.placeAt('#sidebar');
+    var searchForm        = SearchController.addView(SearchFormView, {}, '#mainbar'),
+        results           = SearchController.addView(ResultsView, {
+                              searchData : app.get('searchData')
+                            }, '#mainbar'),
+        recent            = SearchController.addView(RecentSearchesView, {
+                              searches : app.get('searches'),
+                              currentSearch : function() {
+                                return app.get('currentSearch');
+                              }
+                            }, '#sidebar');
 
     searchForm.on('search', update);
     update(term);
@@ -45,11 +47,6 @@ define([
         .then(searchForm.release, searchForm.release);
     }
 
-    return {
-      controller : 'search',
-      update : function(params) {
-        return update(params.term);
-      }
-    };
+    return SearchController;
   };
 });

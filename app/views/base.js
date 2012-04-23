@@ -5,17 +5,20 @@ define([
 ], function(Backbone, _, $) {
   var tplCache = {};
 
-  var Component = function(config) {
-    var ComponentContstructor = Backbone.View.extend(_.extend({
+  var View = function(config) {
+    var ViewConstructor = Backbone.View.extend(_.extend({
       template : '<div></div>',
 
       initialize : function(config) {
+        _.bindAll(this, 'bindTo', 'unbind');
+
         if (config) {
           _.keys(config).forEach(_.bind(function(k) {
             this[k] = config[k];
           }, this));
         }
 
+        this.bindings = [];
         this.prepare();
       },
 
@@ -50,14 +53,36 @@ define([
 
         $(node)[method](this.$el);
         return this;
+      },
+
+      // ref: http://stackoverflow.com/questions/7567404/backbone-js-repopulate-or-recreate-the-view/7607853
+      bindTo : function(model, evt, fn) {
+        model.bind(evt, fn, this);
+        this.bindings.push({
+          evt : evt,
+          fn : fn,
+          model : model
+        });
+      },
+
+      unbind : function() {
+        _.each(this.bindings, function(b) {
+          b.model.unbind(b.evt, b.fn);
+        });
+      },
+
+      destroy : function() {
+        this.unbind();
+        this.remove();
       }
+
     }, config));
 
-    ComponentContstructor.extend(Backbone.Events);
+    ViewConstructor.extend(Backbone.Events);
 
-    return ComponentContstructor;
+    return ViewConstructor;
   };
 
-  return Component;
+  return View;
 });
 

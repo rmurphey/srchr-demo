@@ -22,11 +22,11 @@ define([
     },
 
     prepare : function() {
-      this.searchData.on('add change', this._update, this);
-      this.searchData.on('fetching', function() {
+      this.bindTo(this.searchData, 'add change', this._update);
+      this.bindTo(this.searchData, 'fetching', function() {
         this._empty();
         this.reset();
-      }, this);
+      });
       this.itemTpl = _.template(itemTpl);
     },
 

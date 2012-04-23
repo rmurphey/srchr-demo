@@ -12,7 +12,7 @@ define([
       if (!_.isFunction(this.currentSearch)) {
         throw new Error('Recent searches component needs a currentSearch function');
       }
-      this.searches.on('add remove change', this._update, this);
+      this.bindTo(this.searches, 'add remove change', this._update);
     },
 
     postRender : function() {
