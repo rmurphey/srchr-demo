@@ -1,10 +1,9 @@
 define([
   'models/app',
-  'ui',
   'views/results',
   'views/searchForm',
   'views/recentSearches'
-], function(app, ui, ResultsView, SearchFormView, RecentSearchesView) {
+], function(app, ResultsView, SearchFormView, RecentSearchesView) {
   return function(term) {
     var searchForm =  new SearchFormView({}).render(),
 
@@ -19,9 +18,9 @@ define([
                         }
                       }).render();
 
-    ui.place(searchForm, 'mainbar');
-    ui.place(results, 'mainbar');
-    ui.place(recent, 'sidebar');
+    searchForm.placeAt('#mainbar');
+    results.placeAt('#mainbar');
+    recent.placeAt('#sidebar');
 
     searchForm.on('search', update);
     update(term);
