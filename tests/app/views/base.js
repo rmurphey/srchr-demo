@@ -1,5 +1,5 @@
 define([ 'app/views/base' ], function(C) {
-  describe("Component", function() {
+  describe("Base View", function() {
     var ComponentConstructor, c, el;
 
     beforeEach(function() {
