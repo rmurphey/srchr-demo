@@ -41,7 +41,8 @@ define([
         searches.add({ term : t, time : time });
       }
 
-      searchData.fetch({ data : { term : t } });
+      searchData.fetch({ data : { term : t } })
+        .then(searchForm.release, searchForm.release);
     }
 
     return {
