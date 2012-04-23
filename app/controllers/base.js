@@ -17,13 +17,16 @@ define([
     },
 
     destroy : function() {
+      _.each(this.bindings, function(b) {
+        b.obj.off(b.evt, b.fn);
+      });
+
       _.each(this.views, function(v) {
         v.destroy();
       });
 
-      _.each(this.bindings, function(b) {
-        b.obj.unbind(b.evt, b.fn);
-      });
+      this.views = [];
+      this.bindings = [];
     },
 
     addView : function(View, config, node) {
@@ -37,13 +40,11 @@ define([
       this.bindings.push({
         obj : obj,
         fn : fn,
-        view : view
+        evt : evt
       });
     },
 
-    update : function() {
-
-    }
+    update : function() { }
   };
 
   return Controller;

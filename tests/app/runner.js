@@ -5,7 +5,9 @@ var tests = [
   'tests/app/views/recentSearches',
 
   'tests/app/collections/searches',
-  'tests/app/collections/searchData'
+  'tests/app/collections/searchData',
+
+  'tests/app/controllers/base'
 ];
 
 require(tests, function() {
