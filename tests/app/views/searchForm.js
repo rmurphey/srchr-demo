@@ -26,6 +26,20 @@ define([
       expect(t).to.be('searchterm');
     });
 
+    it("should disable the submit button when the form is submitted", function() {
+      el.find('.js-input').val('searchterm');
+      el.find('.search-form').submit();
+      expect(el.find('.js-submit').attr('disabled')).to.be.ok();
+    });
+
+    it("should enable the submit button when the release method is called", function() {
+      el.find('.js-input').val('searchterm');
+      el.find('.search-form').submit();
+      expect(el.find('.js-submit').attr('disabled')).to.be.ok();
+      sf.release();
+      expect(el.find('.js-submit').attr('disabled')).not.to.be.ok();
+    });
+
     it("should not announce an empty search", function() {
       var t = false;
 
