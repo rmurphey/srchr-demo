@@ -1,12 +1,7 @@
 define([
-  'use!backbone',
-  'collections/searchData',
-  'collections/searches'
-], function(B, SearchData, Searches) {
-  var searches = new Searches(),
-      app = new B.Model({
-        searchData : new SearchData(),
-        searches : searches,
+  'use!backbone'
+], function(B) {
+  var app = new B.Model({
         currentSearch : null
       });
 

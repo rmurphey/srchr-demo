@@ -1,10 +1,15 @@
 define([
   'controllers/base',
+
   'models/app',
+
+  'collections/searchData',
+  'collections/searches',
+
   'views/results',
   'views/searchForm',
   'views/recentSearches'
-], function(Controller, app, ResultsView, SearchFormView, RecentSearchesView) {
+], function(Controller, app, searchData, searches, ResultsView, SearchFormView, RecentSearchesView) {
   return function(term) {
     var SearchController  = new Controller({
           name : 'search',
@@ -15,10 +20,10 @@ define([
 
     var searchForm        = SearchController.addView(SearchFormView, {}, '#mainbar'),
         results           = SearchController.addView(ResultsView, {
-                              searchData : app.get('searchData')
+                              searchData : searchData
                             }, '#mainbar'),
         recent            = SearchController.addView(RecentSearchesView, {
-                              searches : app.get('searches'),
+                              searches : searches,
                               currentSearch : function() {
                                 return app.get('currentSearch');
                               }
@@ -32,9 +37,7 @@ define([
 
       app.set('currentSearch', t);
 
-      var searches =      app.get('searches'),
-          searchData =    app.get('searchData'),
-          existing =      searches.where({ term : t }),
+      var existing =      searches.where({ term : t }),
           time =          new Date().getTime();
 
       if (existing.length) {
