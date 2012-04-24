@@ -8,6 +8,7 @@ var tests = [
   'tests/app/collections/searchData',
 
   'tests/app/models/app',
+  'tests/app/models/search',
 
   'tests/app/controllers/base'
 ];

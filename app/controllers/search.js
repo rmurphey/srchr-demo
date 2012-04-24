@@ -2,6 +2,7 @@ define([
   'controllers/base',
 
   'models/app',
+  'models/search',
 
   'collections/searchData',
   'collections/searches',
@@ -9,7 +10,10 @@ define([
   'views/results',
   'views/searchForm',
   'views/recentSearches'
-], function(Controller, app, searchData, searches, ResultsView, SearchFormView, RecentSearchesView) {
+], function(Controller, app, Search, SearchData, Searches, ResultsView, SearchFormView, RecentSearchesView) {
+  var searches = new Searches(),
+      searchData = new SearchData();
+
   return function(term) {
     var SearchController  = new Controller({
           name : 'search',
@@ -33,21 +37,24 @@ define([
     update(term);
 
     function update(t) {
-      if (!t) { return; }
+      var term            = $.trim(t),
+          existing        = searches.where({ term : term }),
+          search;
 
-      app.set('currentSearch', t);
-
-      var existing =      searches.where({ term : t }),
-          time =          new Date().getTime();
+      app.set('currentSearch', term);
 
       if (existing.length) {
-        existing[0].set('time', time);
+        search = existing[0];
+        search.update();
       } else {
-        searches.add({ term : t, time : time });
+        search = new Search({ term : term });
+        searches.add(search);
       }
 
-      searchData.fetch({ data : { term : t } })
-        .then(searchForm.release, searchForm.release);
+      searchData.fetch({ data : { term : term } })
+        .always(searchForm.release);
+
+      app.router.navigate('search/' + term);
     }
 
     return SearchController;
