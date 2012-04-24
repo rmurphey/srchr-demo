@@ -4,7 +4,6 @@ define([
   var SearchData = B.Collection.extend({
     fetch : function(opts) {
       var fetch = _.bind(B.Collection.prototype.fetch, this),
-          oldTerm = opts && opts.data && opts.data.term,
           dfd = $.Deferred();
 
       this.trigger('fetching');
