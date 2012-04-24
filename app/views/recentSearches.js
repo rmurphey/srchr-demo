@@ -3,8 +3,8 @@ define([
   'views/base',
   'text!views/templates/recentSearches.html',
   'text!views/templates/recentSearch.html'
-], function(_, C, tpl, itemTpl) {
-  return C({
+], function(_, View, tpl, itemTpl) {
+  return View.extend({
     template : tpl,
     itemTpl : _.template(itemTpl),
 

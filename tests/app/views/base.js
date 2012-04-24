@@ -1,12 +1,13 @@
-define([ 'app/views/base' ], function(C) {
+define([
+  'app/views/base'
+], function(View) {
   describe("Base View", function() {
-    var ComponentConstructor, c, el;
+    var c, el;
 
     beforeEach(function() {
       $('#test').remove();
       el = $("<div id='test'></div>").appendTo(document.body);
-      ComponentConstructor = C();
-      c = new ComponentConstructor();
+      c = new View();
     });
 
     it("should have a template by default", function() {
@@ -15,13 +16,14 @@ define([ 'app/views/base' ], function(C) {
 
     describe("#initialize", function() {
       it("should ingest a config object", function() {
-        c = new ComponentConstructor({ foo : 'bar' });
+        var V = View.extend({ foo : 'bar' });
+        c = new V();
         expect(c.foo).to.be('bar');
       });
 
       it("should run the prepare method", function() {
         var flag = false;
-        c = new ComponentConstructor({
+        c = new View({
           prepare : function() {
             flag = true;
           }
@@ -59,16 +61,17 @@ define([ 'app/views/base' ], function(C) {
       });
 
       it("should call the postRender method", function() {
-        var flag = false;
-        c = new ComponentConstructor({
-          postRender : function() {
-            flag = true;
-          }
-        }).render();
+        var flag = false,
+            V = View.extend({
+              postRender : function() {
+                flag = true;
+              }
+            });
+
+        c = new V().render();
 
         expect(flag).to.be(true);
       });
-
     });
 
     describe("#placeAt", function() {

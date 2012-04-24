@@ -2,8 +2,8 @@ define([
   'use!underscore',
   'views/base',
   'text!views/templates/searchForm.html'
-], function(_, C, tpl) {
-  return C({
+], function(_, View, tpl) {
+  return View.extend({
     template : tpl,
 
     prepare : function() {

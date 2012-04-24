@@ -7,7 +7,7 @@ define([
 
     beforeEach(function() {
       destroyFlag = false;
-      V = new View({ destroy : function() {
+      V = View.extend({ destroy : function() {
         destroyFlag = true;
       } });
       $('#test').remove();

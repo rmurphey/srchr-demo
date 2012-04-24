@@ -2,8 +2,8 @@ define([
   'views/base',
   'text!views/templates/results.html',
   'text!views/templates/result.html'
-], function(C, tpl, itemTpl) {
-  return C({
+], function(View, tpl, itemTpl) {
+  return View.extend({
     template : tpl,
 
     events : {
