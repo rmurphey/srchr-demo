@@ -11,11 +11,10 @@ define([
   'views/searchForm',
   'views/recentSearches'
 ], function(Controller, app, Search, SearchData, Searches, ResultsView, SearchFormView, RecentSearchesView) {
-  var searches = new Searches(),
-      searchData = new SearchData();
-
-  return function(term) {
-    var SearchController  = new Controller({
+  return function() {
+    var searches = new Searches(),
+        searchData = new SearchData(),
+        SearchController  = new Controller({
           name : 'search',
           update : function(params) {
             return update(params.term);
@@ -34,7 +33,6 @@ define([
                             }, '#sidebar');
 
     searchForm.on('search', update);
-    update(term);
 
     function update(t) {
       var term            = $.trim(t),

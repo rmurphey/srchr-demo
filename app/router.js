@@ -1,7 +1,7 @@
 define([
   'use!backbone',
-  'controllers'
-], function(B, C) {
+  'controllers/search'
+], function(B, Search) {
   function cleanup() {
     if (currentPage && currentPage.destroy) {
       currentPage.destroy();
@@ -20,10 +20,10 @@ define([
     search : function(term) {
       if (!currentPage || currentPage.name !== 'search') {
         cleanup();
-        currentPage = C.search(term);
-      } else {
-        currentPage.update({ term : term });
+        currentPage = Search();
       }
+
+      currentPage.update({ term : term });
     },
 
     empty : function() {
