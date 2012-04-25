@@ -9,6 +9,7 @@ define([
       window.localStorage.removeItem('searchesTest');
       Searches.prototype.storageKey = 'searchesTest';
       s = new Searches();
+      s.fetch();
     });
 
     it("should sort items in reverse chronological order based on the `time` property", function() {
@@ -29,10 +30,11 @@ define([
       ).to.be(3);
     });
 
-    it("should initialize from local storage", function() {
+    it("should fetch from local storage", function() {
       window.localStorage.setItem('searchesTest', JSON.stringify([ { term : 'foo', time : 123 } ]));
 
       s = new Searches();
+      s.fetch();
       expect(s.where({ term : 'foo' }).length).to.be(1);
     });
   });

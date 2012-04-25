@@ -32,6 +32,7 @@ define([
                               }
                             }, '#sidebar');
 
+    searches.fetch();
     searchForm.on('search', update);
 
     function update(t) {
