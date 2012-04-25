@@ -42,18 +42,20 @@ define([
 
       app.set('currentSearch', term);
 
-      if (existing.length) {
-        search = existing[0];
-        search.update();
-      } else {
-        search = new Search({ term : term });
-        searches.add(search);
+      if (term) {
+        if (existing.length) {
+          search = existing[0];
+          search.update();
+        } else {
+          search = new Search({ term : term });
+          searches.add(search);
+        }
+
+        searchData.fetch({ data : { term : term } })
+          .always(searchForm.release);
+
+        app.router.navigate('search/' + term);
       }
-
-      searchData.fetch({ data : { term : term } })
-        .always(searchForm.release);
-
-      app.router.navigate('search/' + term);
     }
 
     return SearchController;
