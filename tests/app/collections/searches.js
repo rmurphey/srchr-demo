@@ -6,7 +6,8 @@ define([
   describe("Searches Collection", function() {
 
     beforeEach(function() {
-      window.localStorage.removeItem('searches');
+      window.localStorage.removeItem('searchesTest');
+      Searches.prototype.storageKey = 'searchesTest';
       s = new Searches();
     });
 
@@ -24,12 +25,12 @@ define([
       s.add({ term : 'baz', time : 345 });
 
       expect(
-        JSON.parse(window.localStorage.getItem('searches')).length
+        JSON.parse(window.localStorage.getItem('searchesTest')).length
       ).to.be(3);
     });
 
     it("should initialize from local storage", function() {
-      window.localStorage.setItem('searches', JSON.stringify([ { term : 'foo', time : 123 } ]));
+      window.localStorage.setItem('searchesTest', JSON.stringify([ { term : 'foo', time : 123 } ]));
 
       s = new Searches();
       expect(s.where({ term : 'foo' }).length).to.be(1);

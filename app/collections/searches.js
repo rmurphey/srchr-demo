@@ -6,12 +6,13 @@ define([
     comparator : function(item) {
       return item.get('time') * -1;
     },
+    storageKey : 'searches',
     model : Search,
-    store : function(item) {
-      window.localStorage.setItem('searches', JSON.stringify(this.toJSON()));
+    store : function() {
+      window.localStorage.setItem(this.storageKey, JSON.stringify(this.toJSON()));
     },
-    initialize : function() {
-      var searches = JSON.parse(window.localStorage.getItem('searches'));
+    initialize : function(config) {
+      var searches = JSON.parse(window.localStorage.getItem(this.storageKey));
       _.each(searches, _.bind(this.add, this));
       this.on('add remove change', this.store);
     }
