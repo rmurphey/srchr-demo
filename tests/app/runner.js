@@ -10,7 +10,8 @@ var tests = [
   'tests/app/models/app',
   'tests/app/models/search',
 
-  'tests/app/controllers/base'
+  'tests/app/controllers/base',
+  'tests/app/controllers/search'
 ];
 
 require(tests, function() {

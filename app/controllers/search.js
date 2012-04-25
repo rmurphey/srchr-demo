@@ -18,7 +18,10 @@ define([
           name : 'search',
           update : function(params) {
             return update(params.term);
-          }
+          },
+          searches : searches,
+          searchData : searchData,
+          app : app
         });
 
     var searchForm        = SearchController.addView(SearchFormView, {}, '#mainbar'),
@@ -38,6 +41,7 @@ define([
     function update(t) {
       var term            = $.trim(t),
           existing        = searches.where({ term : term }),
+          dfd             = $.Deferred(),
           search;
 
       app.set('currentSearch', term);
@@ -52,10 +56,15 @@ define([
         }
 
         searchData.fetch({ data : { term : term } })
+          .then(dfd.resolve, dfd.reject)
           .always(searchForm.release);
 
         app.router.navigate('search/' + term);
+      } else {
+        dfd.resolve();
       }
+
+      return dfd;
     }
 
     return SearchController;
