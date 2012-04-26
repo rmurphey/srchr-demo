@@ -1,0 +1,18 @@
+<div class="result <%= type %>">
+  <div class="row-fluid">
+    <div class="span2">
+      <img src="<%= thumb %>" width="100">
+    </div>
+    <div class="span9">
+      <% if (title) { %>
+      <h3><a href="<%= link %>"><%= title %></a></h3>
+      <% } %>
+      <p><%= content %></p>
+      <% if (!title) { %>
+      <p><a href="<%= link %>">view original</a></p>
+      <% } %>
+    </div>
+    <div class="span1"><i class="<%= icon %>"></i></div>
+  </div>
+  <hr>
+</div>

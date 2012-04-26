@@ -1,0 +1,1 @@
+define(["use!backbone"],function(a){function b(){return(new Date).getTime()}return a.Model.extend({idAttribute:"term",defaults:function(){return{time:b()}},update:function(){this.set("time",b())}})})
