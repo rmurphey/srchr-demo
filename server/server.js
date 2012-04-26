@@ -70,6 +70,6 @@ module.exports = function(opts) {
   }
 
   // Actually listen
-  site.listen(opts.port);
-  console.log("Serving at http://localhost:" + opts.port);
+  site.listen(opts.port || null);
+  console.log("Serving at http://localhost:" + (opts.port || ''));
 };
