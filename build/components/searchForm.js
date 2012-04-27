@@ -1,1 +1,0 @@
-define(["app/components/base","text!app/templates/searchForm.html"],function(a,b){return a({template:b,events:{"submit .search-form":"_onSearch"},_onSearch:function(a){a.preventDefault();var b=$.trim(this.query(".js-input").val());if(!b)return;this.trigger("search",b)}})})

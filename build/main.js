@@ -1,1 +1,0 @@
-require(["use!backbone","jquery","router","models/app"],function(a,b,c,d){b(function(){d.router=new c,a.history.start()})})

@@ -1,1 +1,0 @@
-define(["use!backbone"],function(a){var b=a.Collection.extend({fetch:function(){var b=_.bind(a.Collection.prototype.fetch,this),c=this.term;this.trigger("fetching"),b().then(_.bind(function(){if(this.term!==c)return;this.trigger("change")},this))},url:function(){return"/search/"+encodeURIComponent(this.term)}});return b})

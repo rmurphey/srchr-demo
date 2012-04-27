@@ -1,1 +1,0 @@
-define(["use!backbone"],function(a){var b=new a.Model({currentSearch:null});return b})

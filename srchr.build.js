@@ -1,6 +1,6 @@
 ({
   baseUrl : 'app',
-  dir : 'build',
+  dir : 'prod',
   paths : {
     lib : '../lib',
     plugins : '../lib/plugins',

@@ -1,1 +1,0 @@
-require.config({deps:window.mocha?["../tests/app/runner"]:["main"],paths:{lib:"../lib",plugins:"../lib/plugins",tests:"../tests",app:".",jquery:"../lib/jquery",underscore:"../lib/underscore",backbone:"../lib/backbone",use:"../lib/plugins/use",text:"../lib/plugins/text"},use:{underscore:{attach:"_"},backbone:{deps:["use!underscore","jquery"],attach:"Backbone"}}})

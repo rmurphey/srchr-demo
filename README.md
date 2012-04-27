@@ -31,7 +31,7 @@ You will need to have RequireJS installed:
 Then, from the root of the project, run the following commands:
 
     r.js -o srchr.build.js
-    r.js -o cssIn=assets/css/srchr.css out=build/assets/css/srchr.css
+    r.js -o cssIn=assets/css/srchr.css out=prod/assets/css/srchr.css
 
 You can run the built version of the app by running:
 

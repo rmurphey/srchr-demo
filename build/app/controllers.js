@@ -1,1 +1,0 @@
-define(["controllers/search"],function(a,b){return{search:a}})
