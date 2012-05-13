@@ -11,10 +11,12 @@ apps. It uses a variety of technologies, including:
 
 ## Running the app
 
-1. Install node. [Homebrew](http://mxcl.github.com/homebrew/) is your best bet: `brew install node`.
+1. Install node. You can [follow the instructions here](http://nodejs.org/#download), or use
+  [Homebrew](http://mxcl.github.com/homebrew/) on a Mac: `brew install node`.
 2. Run `npm install` from the root directory of this project to load the dependencies.
 3. Copy `server/config.js.example` to `server/config.js` and update with your
-   API key(s) if you'd like. Currently, only the Youtube search will work without a key.
+   API key(s) if you'd like. Currently, only the Youtube search will work
+   without a key.
 4. To run the development server: `node bin/dev`
 5. [Visit the app in your browser](http://localhost:4444).
 
