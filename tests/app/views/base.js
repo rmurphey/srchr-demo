@@ -162,7 +162,11 @@ define([
     describe("#destroy", function() {
       it("should call unbind", function() {
         var unbound = false;
-        c.unbind = function() { unbound = true; };
+        var oldUnbind = c.unbind;
+        c.unbind = function() {
+          oldUnbind.call(c);
+          unbound = true;
+        };
         c.destroy();
         expect(unbound).to.be.ok();
       });
