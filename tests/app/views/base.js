@@ -1,13 +1,15 @@
 define([
+  'use!backbone',
   'app/views/base'
-], function(View) {
+], function(B, View) {
   describe("Base View", function() {
-    var c, el;
+    var c, el, model;
 
     beforeEach(function() {
       $('#test').remove();
       el = $("<div id='test'></div>").appendTo(document.body);
       c = new View();
+      model = new B.Model();
     });
 
     it("should have a template by default", function() {
@@ -114,6 +116,62 @@ define([
         var children = el.children();
         expect(children.length).to.be(1);
         expect(children[0]).to.be(c.el);
+      });
+    });
+
+    describe("#bindTo", function() {
+      it("should bind to a model event", function() {
+        var flag = false;
+
+        c.bindTo(model, 'evt', function(val) {
+          flag = val;
+        });
+
+        model.trigger('evt', true);
+        expect(flag).to.be.ok();
+      });
+
+      it("should return an object with an unbind method", function() {
+        var flag = false;
+
+        var binding = c.bindTo(model, 'evt', function(val) {
+          flag = val;
+        });
+
+        binding.unbind();
+        model.trigger('evt', true);
+        expect(flag).not.to.be.ok();
+      });
+    });
+
+    describe("#unbind", function() {
+      it("should unbind all bound events", function() {
+        var flag = false;
+
+        c.bindTo(model, 'evt', function(val) {
+          flag = val;
+        });
+
+        c.unbind();
+
+        model.trigger('evt', true);
+        expect(flag).not.to.be.ok();
+      });
+    });
+
+    describe("#destroy", function() {
+      it("should call unbind", function() {
+        var unbound = false;
+        c.unbind = function() { unbound = true; };
+        c.destroy();
+        expect(unbound).to.be.ok();
+      });
+
+      it("should remove the view from the dom", function() {
+        c.placeAt(el);
+        expect(el.children().length).to.be(1);
+        c.destroy();
+        expect(el.children().length).to.be(0);
       });
     });
   });
