@@ -56,12 +56,16 @@ define([
 
     // ref: http://stackoverflow.com/questions/7567404/backbone-js-repopulate-or-recreate-the-view/7607853
     bindTo : function(model, evt, fn) {
-      model.bind(evt, fn, this);
       var binding = {
         evt : evt,
         fn : fn,
-        model : model
+        model : model,
+        unbind : function() {
+          model.off(evt, fn);
+        }
       };
+
+      model.bind(evt, fn, this);
       this.bindings.push(binding);
       return binding;
     },
