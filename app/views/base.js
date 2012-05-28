@@ -12,13 +12,20 @@ define([
       _.bindAll(this, 'bindTo', 'unbind');
 
       if (config) {
-        _.keys(config).forEach(_.bind(function(k) {
-          this[k] = config[k];
-        }, this));
+        _.extend(this, config);
       }
 
       this.bindings = [];
+
       this.prepare();
+    },
+
+    _setupElements : function() {
+      if (this.elements) {
+        _.forEach(this.elements, function(c) {
+          this[c + 'Element'] = this.$('.js-' + c).eq(0);
+        }, this);
+      }
     },
 
     prepare : function() {
@@ -34,7 +41,7 @@ define([
           data = this.model ? this.model.toJSON() : this;
 
       this.$el.html(tpl(data));
-      this.trigger('render');
+      this._setupElements();
       this.postRender();
       return this;
     },

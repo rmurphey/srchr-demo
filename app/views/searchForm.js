@@ -6,6 +6,8 @@ define([
   return View.extend({
     template : tpl,
 
+    elements : [ 'input', 'submit' ],
+
     prepare : function() {
       _.bindAll(this, 'release', '_onSearch', '_disable');
     },
@@ -18,7 +20,7 @@ define([
       e.preventDefault();
       if (this.disabled) { return; }
 
-      var term = $.trim(this.$('.js-input').val());
+      var term = $.trim(this.inputElement.val());
       if (!term) { return; }
       this._disable();
       this.trigger('search', term);
@@ -26,12 +28,12 @@ define([
 
     release : function() {
       this.disabled = false;
-      this.$('.js-submit').removeAttr('disabled');
+      this.submitElement.removeAttr('disabled');
     },
 
     _disable : function() {
       this.disabled = true;
-      this.$('.js-submit').attr('disabled', true);
+      this.submitElement.attr('disabled', true);
     }
   });
 });

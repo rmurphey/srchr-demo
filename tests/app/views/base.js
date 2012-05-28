@@ -74,6 +74,18 @@ define([
 
         expect(flag).to.be(true);
       });
+
+      it("should set up named properties for elements", function() {
+        var V = View.extend({
+          elements : [ 'wanted' ],
+          template : '<div><section class="js-wanted"></section></div>'
+        });
+
+        c = new V().render();
+        expect(c.wantedElement).to.be.ok();
+        expect(c.wantedElement[0].nodeName.toLowerCase()).to.be('section');
+        expect(c.wantedElement.hasClass('js-wanted')).to.be.ok();
+      });
     });
 
     describe("#placeAt", function() {

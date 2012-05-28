@@ -6,18 +6,20 @@ define([
   return View.extend({
     template : tpl,
 
+    elements : [ 'results' ],
+
     events : {
       'click .js-video-filter' : function(evt) {
-        this._filter(evt, '.video');
+        this._filter(evt, 'video');
       },
       'click .js-image-filter' : function(evt) {
-        this._filter(evt, '.image');
+        this._filter(evt, 'image');
       },
       'click .js-twitter-filter' : function(evt) {
-        this._filter(evt, '.twitter');
+        this._filter(evt, 'twitter');
       },
       'click .js-all-filter' : function(evt) {
-        this._filter(evt, '');
+        this._filter();
       }
     },
 
@@ -38,15 +40,23 @@ define([
     },
 
     _empty : function() {
-      this.$('.js-results').html('Loading &hellip;');
+      this.resultsElement.html('Loading &hellip;');
     },
 
     _filter : function(evt, type) {
-      $(evt.currentTarget).addClass('active').siblings().removeClass('active');
-      if (type) {
+      var target;
+
+      if (evt && type) {
+        target = $(evt.currentTarget);
+
         this.$('.result').hide();
+        this.$('.result.' + type).show();
+      } else {
+        target = $('.js-all-filter');
+        this.$('.result').show();
       }
-      var results = this.$('.result' + type).show();
+
+      target.addClass('active').siblings().removeClass('active');
     },
 
     _update : function() {
@@ -70,7 +80,7 @@ define([
             return tpl(data);
           }).join('');
 
-      this.$('.js-results').html(html);
+      this.resultsElement.html(html);
 
       _.forEach([ 'all', 'video', 'image', 'twitter' ], _.bind(function(type) {
         this.$('.js-' + type + '-count').html(counts[type]);
