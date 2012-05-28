@@ -13,8 +13,6 @@ define([
     template : '<div></div>',
 
     initialize : function(config) {
-      _.bindAll(this, 'bindTo', 'unbind');
-      this._bindings = [];
       this.prepare();
     },
 
@@ -70,6 +68,8 @@ define([
 
     // ref: http://stackoverflow.com/questions/7567404/backbone-js-repopulate-or-recreate-the-view/7607853
     bindTo : function(model, evt, fn) {
+      this._bindings = this._bindings || [];
+
       model.bind(evt, fn, this);
       this._bindings.push(model);
 
@@ -81,6 +81,8 @@ define([
     },
 
     unbind : function() {
+      if (!this._bindings) { return; }
+
       _.each(this._bindings, function(b) {
         b.off(null, null, this);
       }, this);
