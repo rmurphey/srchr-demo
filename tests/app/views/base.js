@@ -17,19 +17,14 @@ define([
     });
 
     describe("#initialize", function() {
-      it("should ingest a config object", function() {
-        var V = View.extend({ foo : 'bar' });
-        c = new V();
-        expect(c.foo).to.be('bar');
-      });
-
       it("should run the prepare method", function() {
         var flag = false;
-        c = new View({
+        var V = View.extend({
           prepare : function() {
             flag = true;
           }
         });
+        c = new V();
 
         expect(flag).to.be(true);
       });
@@ -53,13 +48,6 @@ define([
       it("should be chainable", function() {
         var ret = c.render();
         expect(ret).to.be(c);
-      });
-
-      it("should trigger a render event", function() {
-        var flag;
-        c.on('render', function() { flag = true; });
-        c.render();
-        expect(flag).to.be(true);
       });
 
       it("should call the postRender method", function() {

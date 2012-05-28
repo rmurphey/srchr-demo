@@ -10,11 +10,6 @@ define([
 
     initialize : function(config) {
       _.bindAll(this, 'bindTo', 'unbind');
-
-      if (config) {
-        _.extend(this, config);
-      }
-
       this._bindings = [];
       this.prepare();
     },
@@ -91,4 +86,3 @@ define([
 
   return View;
 });
-

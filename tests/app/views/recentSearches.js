@@ -43,8 +43,8 @@ define([
 
     it("should update when there is a new search", function() {
       expect(el.html()).not.to.contain('baz');
-      rs.currentSearch = function() { return 'baz'; };
-      rs.searches.add({ term : 'baz' });
+      rs.options.currentSearch = function() { return 'baz'; };
+      searches.add({ term : 'baz' });
       expect(el.html()).to.contain('baz');
       expect(el.find('.active').html()).to.contain('baz');
     });

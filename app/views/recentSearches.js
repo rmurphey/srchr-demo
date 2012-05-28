@@ -5,14 +5,15 @@ define([
   'text!views/templates/recentSearch.html'
 ], function(_, View, tpl, itemTpl) {
   return View.extend({
+    options : { },
     template : tpl,
     itemTpl : _.template(itemTpl),
 
     prepare : function() {
-      if (!_.isFunction(this.currentSearch)) {
+      if (!_.isFunction(this.options.currentSearch)) {
         throw new Error('Recent searches component needs a currentSearch function');
       }
-      this.bindTo(this.searches, 'add remove change', this._update);
+      this.bindTo(this.options.searches, 'add remove change', this._update);
     },
 
     postRender : function() {
@@ -20,11 +21,11 @@ define([
     },
 
     _update : function() {
-      this.searches.sort();
+      this.options.searches.sort();
 
       var tpl = this.itemTpl,
-          currentSearch = this.currentSearch(),
-          html = this.searches.map(function(item) {
+          currentSearch = this.options.currentSearch(),
+          html = this.options.searches.map(function(item) {
             var data = item.toJSON();
 
             if (data.term) {

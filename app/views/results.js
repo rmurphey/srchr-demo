@@ -4,6 +4,7 @@ define([
   'text!views/templates/result.html'
 ], function(View, tpl, itemTpl) {
   return View.extend({
+    options : { },
     template : tpl,
 
     elements : [ 'results' ],
@@ -24,8 +25,8 @@ define([
     },
 
     prepare : function() {
-      this.bindTo(this.searchData, 'add change', this._update);
-      this.bindTo(this.searchData, 'fetching', function() {
+      this.bindTo(this.options.searchData, 'add change', this._update);
+      this.bindTo(this.options.searchData, 'fetching', function() {
         this._empty();
         this.reset();
       });
@@ -62,12 +63,12 @@ define([
     _update : function() {
       var tpl = this.itemTpl,
           counts = {
-            all : this.searchData.length,
+            all : this.options.searchData.length,
             video : 0,
             image : 0,
             twitter : 0
           },
-          html = this.searchData.map(function(item) {
+          html = this.options.searchData.map(function(item) {
             var type = item.get('type'),
                 data = item.toJSON();
             counts[type] += 1;
