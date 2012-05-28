@@ -20,7 +20,6 @@ define([
       expect(c.destroy).to.be.a('function');
       expect(c.update).to.be.a('function');
       expect(c.addView).to.be.a('function');
-      expect(c.bindTo).to.be.a('function');
     });
 
     describe("#addView", function() {
@@ -42,29 +41,5 @@ define([
       });
     });
 
-    describe("#bindTo", function() {
-      it("should bind to objects", function() {
-        var flag = false;
-        var c = new C();
-        var view = c.addView(V, {}, '#test');
-        c.bindTo(view, 'testevent', function() {
-          flag = true;
-        });
-        view.trigger('testevent');
-        expect(flag).to.be.ok();
-      });
-
-      it("should register bindings so they are destroyed", function() {
-        var flag = false;
-        var c = new C();
-        var view = c.addView(V, {}, '#test');
-        c.bindTo(view, 'testevent', function() {
-          flag = true;
-        });
-        c.destroy();
-        view.trigger('testevent');
-        expect(flag).not.to.be.ok();
-      });
-    });
   });
 });
