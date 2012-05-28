@@ -23,7 +23,7 @@ define([
       ]);
 
       r = new Results({
-        searchData : data
+        collection : data
       }).render().placeAt(el);
     });
 

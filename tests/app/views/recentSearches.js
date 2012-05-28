@@ -21,7 +21,7 @@ define([
       ]);
 
       rs = new RecentSearches({
-        searches : searches,
+        collection : searches,
         currentSearch : function() {
           return 'foo';
         }

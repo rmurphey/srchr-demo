@@ -26,10 +26,10 @@ define([
 
     var searchForm        = SearchController.addView(SearchFormView, {}, '#mainbar'),
         results           = SearchController.addView(ResultsView, {
-                              searchData : searchData
+                              collection : searchData
                             }, '#mainbar'),
         recent            = SearchController.addView(RecentSearchesView, {
-                              searches : searches,
+                              collection : searches,
                               currentSearch : function() {
                                 return app.get('currentSearch');
                               }

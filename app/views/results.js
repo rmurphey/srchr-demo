@@ -25,8 +25,8 @@ define([
     },
 
     prepare : function() {
-      this.bindTo(this.options.searchData, 'add change', this._update);
-      this.bindTo(this.options.searchData, 'fetching', function() {
+      this.bindTo(this.collection, 'add change', this._update);
+      this.bindTo(this.collection, 'fetching', function() {
         this._empty();
         this.reset();
       });
@@ -63,12 +63,12 @@ define([
     _update : function() {
       var tpl = this.itemTpl,
           counts = {
-            all : this.options.searchData.length,
+            all : this.collection.length,
             video : 0,
             image : 0,
             twitter : 0
           },
-          html = this.options.searchData.map(function(item) {
+          html = this.collection.map(function(item) {
             var type = item.get('type'),
                 data = item.toJSON();
             counts[type] += 1;

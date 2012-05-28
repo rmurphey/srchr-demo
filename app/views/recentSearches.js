@@ -13,7 +13,7 @@ define([
       if (!_.isFunction(this.options.currentSearch)) {
         throw new Error('Recent searches component needs a currentSearch function');
       }
-      this.bindTo(this.options.searches, 'add remove change', this._update);
+      this.bindTo(this.collection, 'add remove change', this._update);
     },
 
     postRender : function() {
@@ -21,11 +21,11 @@ define([
     },
 
     _update : function() {
-      this.options.searches.sort();
+      this.collection.sort();
 
       var tpl = this.itemTpl,
           currentSearch = this.options.currentSearch(),
-          html = this.options.searches.map(function(item) {
+          html = this.collection.map(function(item) {
             var data = item.toJSON();
 
             if (data.term) {
