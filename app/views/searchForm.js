@@ -8,7 +8,7 @@ define([
 
     elements : [ 'input', 'submit' ],
 
-    prepare : function() {
+    initialize : function() {
       _.bindAll(this, 'release', '_onSearch', '_disable');
     },
 

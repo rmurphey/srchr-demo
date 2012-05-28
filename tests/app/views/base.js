@@ -16,20 +16,6 @@ define([
       expect(c.template).to.be.a('string');
     });
 
-    describe("#initialize", function() {
-      it("should run the prepare method", function() {
-        var flag = false;
-        var V = View.extend({
-          prepare : function() {
-            flag = true;
-          }
-        });
-        c = new V();
-
-        expect(flag).to.be(true);
-      });
-    });
-
     describe("events", function() {
       it("should be able to trigger events", function() {
         var flag = false;

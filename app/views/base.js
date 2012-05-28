@@ -12,10 +12,6 @@ define([
   var View = Backbone.View.extend({
     template : '<div></div>',
 
-    initialize : function(config) {
-      this.prepare();
-    },
-
     _setupElements : function() {
       if (this.elements) {
         _.each(this.elements, function(c) {

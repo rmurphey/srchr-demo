@@ -9,7 +9,7 @@ define([
     template : tpl,
     itemTpl : _.template(itemTpl),
 
-    prepare : function() {
+    initialize : function() {
       if (!_.isFunction(this.options.currentSearch)) {
         throw new Error('Recent searches component needs a currentSearch function');
       }

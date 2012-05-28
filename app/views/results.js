@@ -24,7 +24,7 @@ define([
       }
     },
 
-    prepare : function() {
+    initialize : function() {
       this.bindTo(this.collection, 'add change', this._update);
       this.bindTo(this.collection, 'fetching', function() {
         this._empty();
