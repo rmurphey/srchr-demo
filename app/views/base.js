@@ -15,8 +15,7 @@ define([
         _.extend(this, config);
       }
 
-      this.bindings = [];
-
+      this._bindings = [];
       this.prepare();
     },
 
@@ -73,12 +72,12 @@ define([
       };
 
       model.bind(evt, fn, this);
-      this.bindings.push(binding);
+      this._bindings.push(binding);
       return binding;
     },
 
     unbind : function() {
-      _.each(this.bindings, function(b) {
+      _.each(this._bindings, function(b) {
         b.model.off(b.evt, b.fn);
       });
     },
