@@ -90,8 +90,6 @@ define([
 
   });
 
-  View.extend(Backbone.Events);
-
   return View;
 });
 
