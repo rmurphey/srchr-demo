@@ -6,6 +6,7 @@ define([
 ], function(_, View, tpl, itemTpl) {
   return View.extend({
     options : { },
+    elements : [ 'searches' ],
     template : tpl,
     itemTpl : _.template(itemTpl),
 
@@ -36,7 +37,7 @@ define([
             return '';
           }).join('');
 
-      this.$('.js-searches').html(html);
+      this.searchesElement.html(html);
     }
   });
 });
