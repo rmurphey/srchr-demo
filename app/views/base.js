@@ -17,7 +17,7 @@ define([
     //
     // All views get a default `template` property that is an empty div; your
     // views should override this property with a template appropriate for the
-    // view.
+    // view, but if they don't, your views will get a div as their template.
     template : '<div></div>',
 
     // ### `render`
@@ -44,7 +44,10 @@ define([
     //
     // The `serialize` method is responsible for taking the view's data and
     // preparing it to be used by the view's template. You can override or
-    // extend this method as required in your individual view.
+    // extend this method as required in your individual view. By default, it
+    // will use the model or collection assigned to the view as its data,
+    // serializing it using the `toJSON` method; if your view does not have
+    // a model or collection, it will just return the view object itself.
     serialize : function() {
       if (this.model || this.collection) {
         return (this.model || this.collection).toJSON();
@@ -163,8 +166,7 @@ define([
     // ### `destroy`
     //
     // The `destroy` method unbinds all handlers that were bound using
-    // `bindTo`, and also calls the default `Backbone.View.prototype.remove`
-    // method.
+    // `bindTo`, and also calls the default `remove` method.
     destroy : function() {
       this.unbind();
       this.remove();
@@ -188,6 +190,8 @@ define([
     // things here that require the view to be placed in the document, such as
     // operations that require knowing the dimensions of the view.
     postPlaceAt : function() { }
+
+    //
   });
 
   // ## Internals

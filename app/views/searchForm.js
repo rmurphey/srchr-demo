@@ -9,7 +9,7 @@ define([
     elements : [ 'input', 'submit' ],
 
     initialize : function() {
-      _.bindAll(this, 'release', '_onSearch', '_disable');
+      _.bindAll(this, 'release');
     },
 
     events : {
